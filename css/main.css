@@ -92,6 +92,25 @@ body::before {
   user-select: none;
 }
 
+/* Hero Avatar */
+.header__avatar {
+  margin-top: var(--space-xl);
+  display: flex;
+  justify-content: center;
+}
+
+.header__avatar-img {
+  max-width: 280px;
+  height: auto;
+  filter: drop-shadow(0 4px 24px rgba(0, 255, 65, 0.15));
+  transition: transform var(--transition-base), filter var(--transition-base);
+}
+
+.header__avatar-img:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 8px 32px rgba(0, 255, 65, 0.25));
+}
+
 /* Navigation / Filter */
 .nav {
   padding: var(--space-lg) 0;
