@@ -1,0 +1,46 @@
+:root {
+  /* Base colors */
+  --black: #050505;
+  --black-light: #0a0a0a;
+  --black-lighter: #141414;
+  --black-border: #1f1f1f;
+  
+  /* Text colors */
+  --white: #f0f0f0;
+  --white-dim: #a0a0a0;
+  --white-dimmer: #606060;
+  
+  /* Accent - Electric Green */
+  --accent: #00ff41;
+  --accent-dim: rgba(0, 255, 65, 0.15);
+  --accent-glow: rgba(0, 255, 65, 0.4);
+  
+  /* Typography */
+  --font-editorial: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Söhne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Consolas', monospace;
+  
+  /* Sizing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+  
+  /* Grid */
+  --content-width: 1200px;
+  --content-padding: var(--space-lg);
+  
+  /* Timing */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --content-padding: var(--space-md);
+  }
+}
+

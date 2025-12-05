@@ -1,0 +1,35 @@
+{
+  "projects": [
+    {
+      "id": "example-project",
+      "name": "Example Project",
+      "description": "A placeholder project to demonstrate the card layout. Replace with your actual projects.",
+      "url": "https://chadbercea.github.io/example",
+      "repo": "https://github.com/chadbercea/example",
+      "tags": ["javascript", "demo"],
+      "status": "active",
+      "date": "2024-01"
+    },
+    {
+      "id": "another-project",
+      "name": "Another Project",
+      "description": "Another placeholder. This one has a longer description to show how text wraps and truncates in the card layout.",
+      "url": "https://example.com",
+      "repo": "https://github.com/chadbercea/another",
+      "tags": ["python", "api", "tool"],
+      "status": "wip",
+      "date": "2024-02"
+    },
+    {
+      "id": "archived-thing",
+      "name": "Archived Thing",
+      "description": "An old project that's no longer maintained but still worth showing.",
+      "url": null,
+      "repo": "https://github.com/chadbercea/archived",
+      "tags": ["rust", "cli"],
+      "status": "archived",
+      "date": "2023-06"
+    }
+  ]
+}
+

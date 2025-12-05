@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chad Bercea — Personal project hub and portfolio">
+  <title>chadbercea</title>
+  
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!-- Favicons could go here -->
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__top">
+        <span class="header__status">online</span>
+        <span>•</span>
+        <span id="timestamp">loading...</span>
+      </div>
+      
+      <h1 class="header__title">
+        Chad<br><em>Bercea</em>
+      </h1>
+      
+      <p class="header__desc">
+        <span class="prompt">$</span> Personal hub for projects, experiments, and occasionally questionable code decisions.<span class="cursor"></span>
+      </p>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <div class="nav__filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="active">Active</button>
+          <button class="filter-btn" data-filter="wip">WIP</button>
+          <button class="filter-btn" data-filter="archived">Archived</button>
+        </div>
+        <span class="nav__count" id="project-count">Loading...</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="projects">
+    <div class="container">
+      <div class="projects__grid" id="projects-grid">
+        <div class="loading">> Fetching projects...</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span>© 2024 chadbercea</span>
+        <div class="footer__links">
+          <a href="https://github.com/chadbercea" class="footer__link" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/chadbercea" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
+
