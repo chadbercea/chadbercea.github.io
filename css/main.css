@@ -455,6 +455,7 @@ body::before {
 
 .detail__article {
   max-width: 800px;
+  margin: 0 auto;
 }
 
 /* Detail Hero */
