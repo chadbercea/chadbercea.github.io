@@ -52,9 +52,21 @@ class ProjectDetail {
     const project = this.currentProject;
     const clone = this.template.content.cloneNode(true);
 
-    // Update page title
+    // Update page title and meta tags
     document.title = `${project.name} — chadbercea`;
     document.querySelector('meta[name="description"]').content = project.description;
+    
+    // Update OpenGraph tags
+    this.updateMetaTag('og:title', `${project.name} — chadbercea`);
+    this.updateMetaTag('og:description', project.description);
+    this.updateMetaTag('og:url', `https://chadbercea.github.io/project.html?id=${project.id}`);
+    if (project.hero) {
+      this.updateMetaTag('og:image', `https://chadbercea.github.io/${project.hero}`);
+    }
+    
+    // Update Twitter tags
+    this.updateMetaTag('twitter:title', `${project.name} — chadbercea`, 'name');
+    this.updateMetaTag('twitter:description', project.description, 'name');
 
     // Status
     const statusEl = clone.querySelector('[data-status]');
@@ -218,6 +230,14 @@ class ProjectDetail {
         }
       }
     });
+  }
+
+  updateMetaTag(property, content, attr = 'property') {
+    const selector = `meta[${attr}="${property}"]`;
+    const tag = document.querySelector(selector);
+    if (tag) {
+      tag.setAttribute('content', content);
+    }
   }
 }
 
