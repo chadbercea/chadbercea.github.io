@@ -92,23 +92,31 @@ body::before {
   user-select: none;
 }
 
-/* Hero Avatar */
-.header__avatar {
-  margin-top: var(--space-xl);
+/* Hero Layout */
+.header__hero {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.header__avatar {
+  flex-shrink: 0;
 }
 
 .header__avatar-img {
-  max-width: 280px;
+  width: 200px;
   height: auto;
   filter: drop-shadow(0 4px 24px rgba(0, 255, 65, 0.15));
   transition: transform var(--transition-base), filter var(--transition-base);
 }
 
 .header__avatar-img:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
   filter: drop-shadow(0 8px 32px rgba(0, 255, 65, 0.25));
+}
+
+.header__content {
+  flex: 1;
 }
 
 /* Navigation / Filter */
@@ -788,6 +796,16 @@ body::before {
 @media (max-width: 768px) {
   .header {
     padding: var(--space-lg) 0 var(--space-xl);
+  }
+  
+  .header__hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+  
+  .header__avatar-img {
+    width: 120px;
   }
   
   .header__title {
