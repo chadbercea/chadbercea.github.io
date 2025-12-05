@@ -141,7 +141,7 @@ body::before {
 }
 
 .browser-window {
-  width: 320px;
+  width: 480px;
   background: var(--black-light);
   border: 1px solid var(--black-border);
   overflow: hidden;
@@ -198,7 +198,7 @@ body::before {
 }
 
 .browser-window__content {
-  padding: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
 }
 
 .browser-window__preview {
@@ -209,7 +209,7 @@ body::before {
 
 .browser-window__label {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--accent);
@@ -217,21 +217,21 @@ body::before {
 
 .browser-window__title {
   font-family: var(--font-editorial);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   color: var(--white);
 }
 
 .browser-window__subtitle {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: var(--white-dim);
 }
 
 .browser-window__cta {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: var(--white-dimmer);
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
   transition: color var(--transition-fast);
 }
 
