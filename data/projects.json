@@ -4,11 +4,14 @@
       "id": "example-project",
       "name": "Example Project",
       "description": "A placeholder project to demonstrate the card layout. Replace with your actual projects.",
+      "tagline": "A showcase of the editorial hacker design system",
+      "overview": "This is an **example project** demonstrating the full detail page layout.\n\nIt showcases:\n\n- Markdown rendering with `marked.js`\n- The editorial hacker aesthetic\n- Responsive design patterns\n- Project navigation flow\n\n### Technical Details\n\nBuilt with vanilla HTML, CSS, and JavaScript. No build step required — just deploy to GitHub Pages.\n\nThe design system emphasizes:\n\n1. Strong typographic hierarchy\n2. Terminal-inspired UI elements\n3. Electric green accent on deep black\n4. Generous whitespace",
       "url": "https://chadbercea.github.io/example",
       "repo": "https://github.com/chadbercea/example",
-      "tags": ["javascript", "demo"],
+      "tags": ["javascript", "css", "design-system"],
       "status": "active",
-      "date": "2024-01"
+      "date": "2024-01",
+      "updated": "2024-12"
     },
     {
       "id": "another-project",
@@ -32,4 +35,3 @@
     }
   ]
 }
-

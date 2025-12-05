@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <title>Project — chadbercea</title>
+  
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!-- Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+</head>
+<body>
+  <header class="detail-header">
+    <div class="container">
+      <div class="detail-header__inner">
+        <a href="/" class="detail-header__back">
+          <span class="detail-header__back-arrow">←</span>
+          <span>Back to projects</span>
+        </a>
+        <span class="detail-header__timestamp" id="timestamp">loading...</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="detail" id="detail-content">
+    <div class="container">
+      <div class="detail__loading">
+        <span class="prompt">$</span> Loading project...<span class="cursor"></span>
+      </div>
+    </div>
+  </main>
+
+  <template id="detail-template">
+    <article class="detail__article">
+      <!-- Hero Section -->
+      <header class="detail__hero">
+        <div class="detail__hero-meta">
+          <span class="detail__status" data-status></span>
+          <span class="detail__date" data-date></span>
+        </div>
+        <h1 class="detail__title" data-title></h1>
+        <p class="detail__tagline" data-tagline></p>
+      </header>
+
+      <!-- Hero Image -->
+      <figure class="detail__image-wrap" data-hero-wrap>
+        <img class="detail__image" data-hero alt="">
+      </figure>
+
+      <!-- Overview -->
+      <section class="detail__section">
+        <h2 class="detail__section-title">Overview</h2>
+        <div class="detail__overview markdown-content" data-overview></div>
+      </section>
+
+      <!-- Tech Stack -->
+      <section class="detail__section">
+        <h2 class="detail__section-title">Tech Stack</h2>
+        <div class="detail__tags" data-tags></div>
+      </section>
+
+      <!-- Links -->
+      <section class="detail__section">
+        <h2 class="detail__section-title">Links</h2>
+        <div class="detail__links" data-links></div>
+      </section>
+
+      <!-- Meta Footer -->
+      <footer class="detail__meta">
+        <span data-meta-built></span>
+        <span class="detail__meta-sep">•</span>
+        <span data-meta-status></span>
+        <span class="detail__meta-sep" data-meta-updated-sep>•</span>
+        <span data-meta-updated></span>
+      </footer>
+
+      <!-- Navigation -->
+      <nav class="detail__nav">
+        <a href="/" class="detail__nav-link detail__nav-link--back">
+          ← Back to projects
+        </a>
+        <a href="#" class="detail__nav-link detail__nav-link--next" data-next>
+          Next: <span data-next-name></span> →
+        </a>
+      </nav>
+    </article>
+  </template>
+
+  <template id="error-template">
+    <div class="detail__error">
+      <p><span class="prompt">></span> Error: <span data-error-message></span></p>
+      <a href="/" class="detail__error-link">← Back to projects</a>
+    </div>
+  </template>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span>© 2024 chadbercea</span>
+        <div class="footer__links">
+          <a href="https://github.com/chadbercea" class="footer__link" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/chadbercea" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="js/project-detail.js"></script>
+</body>
+</html>
+

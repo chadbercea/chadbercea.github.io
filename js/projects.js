@@ -27,6 +27,42 @@ class ProjectManager {
     }
   }
 
+  // Determine card type based on available data
+  getCardType(project) {
+    const hasDetailContent = project.overview || project.hero;
+    
+    if (hasDetailContent) return 'project';  // → Detail page
+    if (project.repo && !project.url) return 'repo';  // → Repo directly
+    return 'external';  // → External URL
+  }
+
+  // Get CTA config based on card type
+  getCardCTA(project) {
+    const type = this.getCardType(project);
+    
+    switch (type) {
+      case 'project':
+        return { 
+          label: 'View →', 
+          href: `/project.html?id=${project.id}`,
+          external: false
+        };
+      case 'repo':
+        return { 
+          label: 'Repo →', 
+          href: project.repo,
+          external: true
+        };
+      case 'external':
+      default:
+        return { 
+          label: 'Link →', 
+          href: project.url || project.repo,
+          external: true
+        };
+    }
+  }
+
   render() {
     if (!this.filteredProjects.length) {
       this.grid.innerHTML = '<div class="empty">> No projects match filter.</div>';
@@ -44,16 +80,12 @@ class ProjectManager {
     const statusText = project.status.toUpperCase();
     const tags = project.tags.map(tag => `<span class="card__tag">${tag}</span>`).join('');
     
-    const links = [];
-    if (project.url) {
-      links.push(`<a href="${project.url}" class="card__link" target="_blank" rel="noopener">View →</a>`);
-    }
-    if (project.repo) {
-      links.push(`<a href="${project.repo}" class="card__link" target="_blank" rel="noopener">Repo</a>`);
-    }
+    const cta = this.getCardCTA(project);
+    const ctaTarget = cta.external ? 'target="_blank" rel="noopener"' : '';
+    const ctaLink = `<a href="${cta.href}" class="card__link" ${ctaTarget}>${cta.label}</a>`;
 
     return `
-      <article class="card" data-id="${project.id}" data-url="${project.url || project.repo}">
+      <article class="card" data-id="${project.id}" data-href="${cta.href}" data-external="${cta.external}">
         <div class="card__header">
           <h3 class="card__title">${project.name}</h3>
           <span class="card__status ${statusClass}">[${statusText}]</span>
@@ -63,7 +95,7 @@ class ProjectManager {
           <div class="card__tags">${tags}</div>
           <span class="card__date">${project.date}</span>
         </div>
-        <div class="card__links">${links.join('')}</div>
+        <div class="card__links">${ctaLink}</div>
       </article>
     `;
   }
@@ -72,12 +104,18 @@ class ProjectManager {
     const cards = this.grid.querySelectorAll('.card');
     cards.forEach(card => {
       card.addEventListener('click', (e) => {
-        // Don't navigate if clicking a link inside the card
+        // Don't double-navigate if clicking the CTA link directly
         if (e.target.closest('.card__link')) return;
         
-        const url = card.dataset.url;
-        if (url && url !== 'null') {
-          window.open(url, '_blank');
+        const href = card.dataset.href;
+        const isExternal = card.dataset.external === 'true';
+        
+        if (href) {
+          if (isExternal) {
+            window.open(href, '_blank');
+          } else {
+            window.location.href = href;
+          }
         }
       });
     });
@@ -116,4 +154,3 @@ class ProjectManager {
 }
 
 export default ProjectManager;
-

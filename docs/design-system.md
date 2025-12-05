@@ -280,6 +280,58 @@ js/
 
 ---
 
+## Markdown Content
+
+For rich text areas (project overviews, blog content), use markdown with these constraints:
+
+### Dependencies
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+```
+
+### Usage
+
+```javascript
+const html = DOMPurify.sanitize(marked.parse(markdownString));
+element.innerHTML = html;
+```
+
+### Allowed Elements
+
+| Element | Usage |
+|---------|-------|
+| `**bold**` | Emphasis |
+| `*italic*` | Secondary emphasis |
+| `` `code` `` | Inline code, commands |
+| `[text](url)` | Links |
+| `- item` | Unordered lists |
+| `1. item` | Ordered lists |
+| ` ``` ` | Code blocks |
+| `### Heading` | Subheadings (h3+ only) |
+
+### Heading Restrictions
+
+- **h1**: Reserved for page title only
+- **h2**: Reserved for major sections
+- **h3+**: Allowed in markdown content
+
+### Styling Markdown Output
+
+```css
+.markdown-content h3 { /* styles */ }
+.markdown-content p { /* styles */ }
+.markdown-content a { /* styles */ }
+.markdown-content code { /* styles */ }
+.markdown-content pre { /* styles */ }
+.markdown-content ul, .markdown-content ol { /* styles */ }
+```
+
+Apply `.markdown-content` wrapper class to rendered markdown areas.
+
+---
+
 ## Extending
 
 When adding new components:
