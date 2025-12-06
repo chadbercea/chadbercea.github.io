@@ -628,8 +628,13 @@ body::before {
   border: 1px solid var(--black-border);
   padding: var(--space-lg);
   position: relative;
-  transition: all var(--transition-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
   cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+  --shine-x: 50%;
+  --shine-y: 50%;
+  --shine-opacity: 0;
 }
 
 .card::before {
@@ -642,9 +647,23 @@ body::before {
   pointer-events: none;
 }
 
+/* Shine overlay for tilt effect */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--shine-x) var(--shine-y),
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 60%
+  );
+  opacity: var(--shine-opacity);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
 .card:hover {
   border-color: var(--accent);
-  transform: translateY(-2px);
 }
 
 .card:hover::before {
