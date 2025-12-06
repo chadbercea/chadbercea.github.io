@@ -101,14 +101,80 @@ body::before {
   position: relative;
 }
 
-/* Hero Particles Canvas */
-.hero-particles {
+/* Terminal Effects */
+
+/* Scrolling log output */
+.terminal-logs {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  bottom: 0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--white-dimmer);
+  opacity: 0.3;
   pointer-events: none;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.terminal-log-line {
+  animation: logFadeIn 0.3s ease-out;
+  white-space: nowrap;
+}
+
+.terminal-log-line.fade-out {
+  animation: logFadeOut 1s ease-out forwards;
+}
+
+@keyframes logFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Command hints */
+.command-hints {
+  display: flex;
+  gap: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--white-dimmer);
+  opacity: 0.5;
+  margin-top: var(--space-sm);
+}
+
+.command-hint kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  background: var(--black-lighter);
+  border: 1px solid var(--black-border);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  margin-right: 4px;
+}
+
+/* ASCII divider */
+.ascii-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  color: var(--black-border);
+  opacity: 0.5;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  pointer-events: none;
+  letter-spacing: -1px;
 }
 
 .header__avatar {
