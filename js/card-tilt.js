@@ -107,9 +107,34 @@ class CardTilt {
   }
 }
 
-// Initialize on DOM ready
+// Initialize on DOM ready and watch for dynamically added cards
 document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card => new CardTilt(card));
+  // Initialize existing cards
+  const initCards = () => {
+    document.querySelectorAll('.card:not([data-tilt-init])').forEach(card => {
+      card.setAttribute('data-tilt-init', 'true');
+      new CardTilt(card);
+    });
+  };
+  
+  // Initial run
+  initCards();
+  
+  // Watch for new cards added dynamically
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach(mutation => {
+      if (mutation.addedNodes.length) {
+        initCards();
+      }
+    });
+  });
+  
+  const grid = document.querySelector('.grid');
+  if (grid) {
+    observer.observe(grid, { childList: true, subtree: true });
+  }
+  
+  // Also run after a short delay to catch async renders
+  setTimeout(initCards, 500);
 });
 
