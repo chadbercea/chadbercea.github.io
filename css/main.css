@@ -130,6 +130,8 @@ body::before {
   top: 50%;
   transform: translateY(-50%);
   transition: transform var(--transition-base);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .header__featured:hover {
@@ -138,6 +140,7 @@ body::before {
 
 .header__featured:hover .browser-window {
   border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 255, 65, 0.15);
 }
 
 .header__featured:hover .browser-window__cta {
