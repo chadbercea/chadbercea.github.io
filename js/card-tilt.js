@@ -6,12 +6,20 @@
 class CardTilt {
   constructor(card) {
     this.card = card;
-    this.inner = card.querySelector('.card__inner') || card;
     
-    // Configuration - heavy tilt
-    this.maxRotation = 15;
-    this.perspective = 800;
-    this.scale = 1.02;
+    // Configuration - HEAVY tilt
+    this.maxRotation = 25;
+    this.perspective = 600;
+    this.scale = 1.05;
+    
+    // Parallax layers with depth
+    this.layers = {
+      header: { el: card.querySelector('.card__header'), depth: 60 },
+      title: { el: card.querySelector('.card__title'), depth: 80 },
+      desc: { el: card.querySelector('.card__desc'), depth: 40 },
+      meta: { el: card.querySelector('.card__meta'), depth: 30 },
+      links: { el: card.querySelector('.card__links'), depth: 100 }
+    };
     
     // State
     this.isHovering = false;
@@ -59,10 +67,10 @@ class CardTilt {
     const offsetX = (e.clientX - centerX) / (rect.width / 2);
     const offsetY = (e.clientY - centerY) / (rect.height / 2);
     
-    // Invert Y for natural feel
+    // Card faces toward the mouse
     this.targetRotation = {
-      x: -offsetY * this.maxRotation,
-      y: offsetX * this.maxRotation
+      x: offsetY * this.maxRotation,
+      y: -offsetX * this.maxRotation
     };
   }
   
@@ -86,6 +94,9 @@ class CardTilt {
     // Add shine effect based on rotation
     this.applyShine();
     
+    // Apply parallax to inner elements
+    this.applyParallax();
+    
     // Continue animation if hovering or still moving
     const isMoving = 
       Math.abs(this.targetRotation.x - this.currentRotation.x) > 0.01 ||
@@ -96,6 +107,7 @@ class CardTilt {
     } else {
       // Reset transforms
       this.card.style.transform = '';
+      this.resetParallax();
     }
   }
   
@@ -103,11 +115,32 @@ class CardTilt {
     // Create a subtle light reflection based on tilt
     const shineX = 50 + this.currentRotation.y * 3;
     const shineY = 50 + this.currentRotation.x * 3;
-    const opacity = this.isHovering ? 0.1 : 0;
+    const opacity = this.isHovering ? 0.15 : 0;
     
     this.card.style.setProperty('--shine-x', `${shineX}%`);
     this.card.style.setProperty('--shine-y', `${shineY}%`);
     this.card.style.setProperty('--shine-opacity', opacity);
+  }
+  
+  applyParallax() {
+    const rotationFactorX = this.currentRotation.x / this.maxRotation;
+    const rotationFactorY = this.currentRotation.y / this.maxRotation;
+    
+    Object.values(this.layers).forEach(layer => {
+      if (!layer.el) return;
+      
+      const moveX = rotationFactorY * layer.depth * -1;
+      const moveY = rotationFactorX * layer.depth;
+      
+      layer.el.style.transform = `translate3d(${moveX}px, ${moveY}px, ${layer.depth}px)`;
+    });
+  }
+  
+  resetParallax() {
+    Object.values(this.layers).forEach(layer => {
+      if (!layer.el) return;
+      layer.el.style.transform = '';
+    });
   }
 }
 
