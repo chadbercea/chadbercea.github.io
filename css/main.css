@@ -855,7 +855,7 @@ body::before {
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
@@ -865,8 +865,7 @@ body::before {
 }
 
 .card {
-  animation: fadeUp 0.5s ease forwards;
-  opacity: 0;
+  animation: fadeUp 0.5s ease both;
 }
 
 .card:nth-child(1) { animation-delay: 0.1s; }

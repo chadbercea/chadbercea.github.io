@@ -23,6 +23,10 @@ class CardTilt {
   }
   
   init() {
+    // Clear animation so transform works
+    this.card.style.animation = 'none';
+    this.card.style.opacity = '1';
+    
     // Set up 3D transform
     this.card.style.perspective = `${this.perspective}px`;
     this.card.style.transformStyle = 'preserve-3d';
