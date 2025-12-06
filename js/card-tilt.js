@@ -12,13 +12,13 @@ class CardTilt {
     this.perspective = 600;
     this.scale = 1.05;
     
-    // Parallax layers with depth
+    // Parallax layers with depth (dialed back ~30%)
     this.layers = {
-      header: { el: card.querySelector('.card__header'), depth: 60 },
-      title: { el: card.querySelector('.card__title'), depth: 80 },
-      desc: { el: card.querySelector('.card__desc'), depth: 40 },
-      meta: { el: card.querySelector('.card__meta'), depth: 30 },
-      links: { el: card.querySelector('.card__links'), depth: 100 }
+      header: { el: card.querySelector('.card__header'), depth: 40 },
+      title: { el: card.querySelector('.card__title'), depth: 55 },
+      desc: { el: card.querySelector('.card__desc'), depth: 25 },
+      meta: { el: card.querySelector('.card__meta'), depth: 20 },
+      links: { el: card.querySelector('.card__links'), depth: 70 }
     };
     
     // State
