@@ -256,7 +256,7 @@ body::before {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  transform: translateZ(40px);
+  transform: translateZ(50px);
   padding: var(--space-sm) var(--space-md);
 }
 
@@ -302,7 +302,7 @@ body::before {
   flex: 1;
   display: flex;
   flex-direction: column;
-  transform: translateZ(20px);
+  transform: translateZ(30px);
   gap: var(--space-md);
 }
 
@@ -396,7 +396,7 @@ body::before {
 .preview__right {
   display: flex;
   gap: var(--space-md);
-  transform: translateZ(60px);
+  transform: translateZ(80px);
 }
 
 .preview__card {
@@ -450,7 +450,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateZ(10px);
+  transform: translateZ(15px);
   gap: var(--space-md);
   padding: var(--space-sm);
 }
