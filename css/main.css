@@ -129,13 +129,8 @@ body::before {
   right: -580px;
   top: 50%;
   transform: translateY(-50%);
-  transition: transform var(--transition-base);
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-.header__featured:hover {
-  transform: translateY(-50%) translateY(-4px);
+  transition: transform 0.2s ease-out;
+  text-decoration: none;
 }
 
 .header__featured:hover .browser-window {
