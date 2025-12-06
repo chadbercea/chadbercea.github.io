@@ -15,12 +15,12 @@ class TiltEffect {
     };
     
     // Configuration
-    this.maxRotation = 8; // degrees
+    this.maxRotation = 12; // degrees
     this.parallaxMultiplier = {
-      nav: 15,
-      left: 10,
-      right: 25,
-      carousel: 5
+      nav: 30,
+      left: 20,
+      right: 50,
+      carousel: 10
     };
     
     // State
@@ -112,7 +112,7 @@ class TiltEffect {
   }
   
   getBaseZ(name) {
-    const depths = { nav: 20, left: 10, right: 30, carousel: 5 };
+    const depths = { nav: 40, left: 20, right: 60, carousel: 10 };
     return depths[name] || 0;
   }
   
