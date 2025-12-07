@@ -1,32 +1,52 @@
 /**
  * Tilt Effect for Browser Window
- * Adds mouse-tracking 3D tilt and parallax depth
+ * Adds mouse-tracking 3D tilt and parallax depth (matching card behavior)
  */
 
 class TiltEffect {
   constructor(element) {
     this.element = element;
     this.browserWindow = element.querySelector('.browser-window');
+    
+    // All parallax layers with their depth multipliers
     this.layers = {
+      chrome: element.querySelector('.browser-window__chrome'),
       nav: element.querySelector('.preview__nav'),
+      badge: element.querySelector('.preview__badge'),
+      headline: element.querySelector('.preview__headline'),
+      desc: element.querySelector('.preview__desc'),
+      metrics: element.querySelector('.preview__metrics'),
       left: element.querySelector('.preview__left'),
       right: element.querySelector('.preview__right'),
-      carousel: element.querySelector('.preview__carousel')
+      carousel: element.querySelector('.preview__carousel'),
+      cards: element.querySelectorAll('.preview__card')
     };
     
-    // Configuration
-    this.maxRotation = 15; // degrees
-    this.parallaxMultiplier = {
-      nav: 45,
-      left: 30,
-      right: 70,
-      carousel: 15
+    // Configuration - matching the card tilt intensity
+    this.maxRotation = 12; // degrees
+    this.scale = 1.02;
+    
+    // Parallax depths (higher = more movement, like card behavior)
+    this.parallaxDepth = {
+      chrome: 15,
+      nav: 25,
+      badge: 35,
+      headline: 50,
+      desc: 30,
+      metrics: 40,
+      left: 35,
+      right: 60,
+      carousel: 20,
+      cards: 45
     };
     
     // State
+    this.rect = null;
     this.isHovering = false;
-    this.currentRotation = { x: 0, y: 0 };
-    this.targetRotation = { x: 0, y: 0 };
+    this.currentX = 0;
+    this.currentY = 0;
+    this.targetX = 0;
+    this.targetY = 0;
     this.animationFrame = null;
     
     this.init();
@@ -40,87 +60,96 @@ class TiltEffect {
   
   onMouseEnter() {
     this.isHovering = true;
+    this.rect = this.element.getBoundingClientRect();
     this.animate();
   }
   
   onMouseLeave() {
     this.isHovering = false;
-    this.targetRotation = { x: 0, y: 0 };
-    // Continue animation to smoothly reset
+    this.targetX = 0;
+    this.targetY = 0;
   }
   
   onMouseMove(e) {
-    if (!this.isHovering) return;
+    if (!this.isHovering || !this.rect) return;
     
-    const rect = this.element.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+    // Calculate position relative to center (-1 to 1)
+    const x = e.clientX - (this.rect.left + this.rect.width / 2);
+    const y = e.clientY - (this.rect.top + this.rect.height / 2);
     
-    // Calculate offset from center (-1 to 1)
-    const offsetX = (e.clientX - centerX) / (rect.width / 2);
-    const offsetY = (e.clientY - centerY) / (rect.height / 2);
-    
-    // Invert Y for natural feel (mouse up = tilt back)
-    this.targetRotation = {
-      x: -offsetY * this.maxRotation,
-      y: offsetX * this.maxRotation
-    };
+    this.targetX = x / (this.rect.width / 2);
+    this.targetY = y / (this.rect.height / 2);
   }
   
   animate() {
-    // Smooth interpolation
-    const ease = 0.1;
+    // Smooth interpolation (matching card easing)
+    const ease = 0.08;
     
-    this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * ease;
-    this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * ease;
+    this.currentX += (this.targetX - this.currentX) * ease;
+    this.currentY += (this.targetY - this.currentY) * ease;
     
-    // Apply rotation to browser window
+    // Calculate rotation (tilt toward mouse, like cards)
+    const rotateX = -this.currentY * this.maxRotation;
+    const rotateY = this.currentX * this.maxRotation;
+    
+    // Apply rotation and scale to browser window
+    const currentScale = this.isHovering ? this.scale : 1;
     this.browserWindow.style.transform = `
-      rotateX(${this.currentRotation.x}deg) 
-      rotateY(${this.currentRotation.y}deg)
+      scale(${currentScale})
+      rotateX(${rotateX}deg) 
+      rotateY(${rotateY}deg)
     `;
     
-    // Apply parallax to layers
+    // Apply parallax to all layers (elements follow mouse)
     this.applyParallax();
     
     // Continue animation if hovering or still moving
     const isMoving = 
-      Math.abs(this.targetRotation.x - this.currentRotation.x) > 0.01 ||
-      Math.abs(this.targetRotation.y - this.currentRotation.y) > 0.01;
+      Math.abs(this.targetX - this.currentX) > 0.001 ||
+      Math.abs(this.targetY - this.currentY) > 0.001;
     
     if (this.isHovering || isMoving) {
       this.animationFrame = requestAnimationFrame(() => this.animate());
     } else {
-      // Reset transforms when animation completes
       this.browserWindow.style.transform = '';
       this.resetParallax();
     }
   }
   
   applyParallax() {
-    const rotationFactor = this.currentRotation.y / this.maxRotation;
-    
     Object.entries(this.layers).forEach(([name, layer]) => {
       if (!layer) return;
       
-      const multiplier = this.parallaxMultiplier[name];
-      const offsetX = rotationFactor * multiplier;
-      const baseZ = this.getBaseZ(name);
+      const depth = this.parallaxDepth[name] || 20;
       
-      layer.style.transform = `translateZ(${baseZ}px) translateX(${offsetX}px)`;
+      // Handle NodeList (multiple elements like cards)
+      if (layer instanceof NodeList) {
+        layer.forEach((el, i) => {
+          // Stagger depth for multiple elements
+          const staggerDepth = depth + (i * 10);
+          const offsetX = this.currentX * staggerDepth;
+          const offsetY = this.currentY * staggerDepth;
+          el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${staggerDepth}px)`;
+        });
+      } else {
+        const offsetX = this.currentX * depth;
+        const offsetY = this.currentY * depth;
+        layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${depth}px)`;
+      }
     });
-  }
-  
-  getBaseZ(name) {
-    const depths = { nav: 50, left: 30, right: 80, carousel: 15 };
-    return depths[name] || 0;
   }
   
   resetParallax() {
     Object.entries(this.layers).forEach(([name, layer]) => {
       if (!layer) return;
-      const baseZ = this.getBaseZ(name);
-      layer.style.transform = `translateZ(${baseZ}px)`;
+      
+      if (layer instanceof NodeList) {
+        layer.forEach(el => {
+          el.style.transform = '';
+        });
+      } else {
+        layer.style.transform = '';
+      }
     });
   }
 }

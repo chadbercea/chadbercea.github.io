@@ -10,23 +10,28 @@ class TerminalEffects {
     this.asciiContainer = null;
     
     this.logs = [
-      '> initializing design_system.css',
-      '> loading projects.json',
-      '[OK] fonts loaded: Instrument Serif, JetBrains Mono',
-      '> compiling editorial_hacker.theme',
-      '[OK] accent: #00FF41',
-      '> mounting components...',
-      '[OK] header rendered',
-      '[OK] project cards: 3 loaded',
-      '> listening on localhost:8080',
-      '$ git status',
-      'On branch main',
-      'nothing to commit, working tree clean',
-      '> checking for updates...',
-      '[OK] system ready',
+      '> checking if anyone is reading this...',
+      '[OK] coffee levels: critically low',
+      '> deploying vibes...',
+      '[WARN] meetings detected, initiating avoidance.exe',
       '$ whoami',
-      'chadbercea',
-      '> idle...',
+      'just a guy who likes to build stuff',
+      '> compiling excuses for technical debt...',
+      '[OK] bugs renamed to "features"',
+      '> googling error message...',
+      '[OK] found stackoverflow answer from 2014',
+      '> pushing to production on friday...',
+      '[WARN] this is fine. everything is fine.',
+      '$ git blame',
+      'it was me. it\'s always me.',
+      '> running npm install...',
+      '[OK] added 847 packages, 12 vulnerabilities',
+      '> pretending to understand kubernetes...',
+      '[OK] successfully nodded in meeting',
+      '> checking if code works...',
+      '[OK] works on my machine™',
+      '$ sudo make me a sandwich',
+      'okay.',
     ];
     
     this.hints = [
@@ -57,14 +62,16 @@ class TerminalEffects {
     this.createAsciiDivider();
   }
   
-  // 1. Scrolling log output in hero background
+  // 1. Scrolling log output beneath "Personal hub for projects..." copy
   createLogScroller() {
-    const hero = document.querySelector('.header__hero');
-    if (!hero) return;
+    // Insert directly after the header description paragraph, inside header__content
+    const headerDesc = document.querySelector('.header .header__content > .header__desc');
+    if (!headerDesc) return;
     
     this.logContainer = document.createElement('div');
     this.logContainer.className = 'terminal-logs';
-    hero.appendChild(this.logContainer);
+    // Insert right after the description text
+    headerDesc.insertAdjacentElement('afterend', this.logContainer);
     
     this.scheduleNextLog();
   }

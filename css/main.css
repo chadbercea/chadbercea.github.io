@@ -105,18 +105,14 @@ body::before {
 
 /* Scrolling log output */
 .terminal-logs {
-  position: absolute;
-  left: 0;
-  bottom: 0;
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   color: var(--white-dimmer);
-  opacity: 0.3;
+  opacity: 0.6;
   pointer-events: none;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  margin-top: var(--space-lg);
+  min-height: 80px;
+  max-width: 400px;
 }
 
 .terminal-log-line {
