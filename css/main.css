@@ -353,7 +353,7 @@ body::before {
   display: block;
   position: absolute;
   right: -580px;
-  top: 50%;
+  top: calc(50% + 20px); /* Offset to clear fixed nav */
   transform: translateY(-50%);
   text-decoration: none;
   perspective: 1000px;
