@@ -22,3 +22,9 @@ Projects are primarily deployed on GitHub Pages, but the hub is platform-agnosti
 
 Keep it simple. This page exists to point people in the right direction, not to be the destination itself.
 
+## Development Workflow
+
+- **Never commit directly to main.** Always create a feature branch first.
+- Branch names should reference the Linear issue (e.g., `ili-254-reduce-motion`)
+- Merge to main only after the feature is complete and tested.
+
