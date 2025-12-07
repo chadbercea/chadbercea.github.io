@@ -1,6 +1,15 @@
 {
   "projects": [
     {
+      "id": "iliketobuild",
+      "name": "I Like To Build",
+      "description": "My AI experiments, projects, and blog. Building in public with Claude, Cursor, and whatever comes next.",
+      "url": "https://iliketobuild.io",
+      "tags": ["ai", "blog", "experiments"],
+      "status": "wip",
+      "date": "2024-12"
+    },
+    {
       "id": "focusdoro",
       "name": "FocusDoro.io",
       "description": "A minimal pomodoro timer PWA. Clean interface, zero distractions, works offline.",
@@ -13,7 +22,7 @@
       "id": "i-like-to-play",
       "name": "I Like To Play",
       "description": "Mobile-first retro game collecting app. Track your collection, wishlist, and trades.",
-      "url": "https://iliketoplay.app",
+      "url": "https://iliketoplay.co",
       "tags": ["mobile", "react", "gaming"],
       "status": "active",
       "date": "2024-03"
@@ -31,7 +40,7 @@
       "id": "json-pokemon",
       "name": "JSON Pokemon",
       "description": "Generate events as test data for building apps. Pokémon-themed mock data generator.",
-      "url": "https://chadbercea.github.io/json-pokemon",
+      "url": "https://thisismylab-bcbf4efd7fa6.herokuapp.com/",
       "tags": ["tool", "api", "testing"],
       "status": "active",
       "date": "2023-09"
@@ -40,7 +49,7 @@
       "id": "middle-earth-merchants",
       "name": "Middle Earth Merchants",
       "description": "A trading game based on Drug Wars, set in Tolkien's world. Buy low in the Shire, sell high in Mordor.",
-      "url": "https://chadbercea.github.io/middle-earth-merchants",
+      "url": "https://middleearthmerchants.com/",
       "tags": ["game", "javascript", "tolkien"],
       "status": "active",
       "date": "2023-04"
