@@ -108,12 +108,16 @@ class TiltEffect {
       Math.abs(this.targetX - this.currentX) > 0.001 ||
       Math.abs(this.targetY - this.currentY) > 0.001;
     
+    // Always continue animating - let values naturally settle to 0
     if (this.isHovering || isMoving) {
       this.animationFrame = requestAnimationFrame(() => this.animate());
     } else {
-      // Animation complete - set final resting transforms (not empty string)
-      this.browserWindow.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
-      this.resetParallax();
+      // Animation complete and at rest - clear inline styles to return to original state
+      // Use a tiny delay to ensure the final frame rendered at ~0 values
+      requestAnimationFrame(() => {
+        this.browserWindow.style.transform = '';
+        this.resetParallax();
+      });
     }
   }
   
@@ -126,16 +130,14 @@ class TiltEffect {
       // Handle NodeList (multiple elements like cards)
       if (layer instanceof NodeList) {
         layer.forEach((el, i) => {
-          // Stagger depth for multiple elements
-          const staggerDepth = depth + (i * 10);
-          const offsetX = this.currentX * staggerDepth;
-          const offsetY = this.currentY * staggerDepth;
-          el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${staggerDepth}px)`;
+          const offsetX = this.currentX * depth;
+          const offsetY = this.currentY * depth;
+          el.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0px)`;
         });
       } else {
         const offsetX = this.currentX * depth;
         const offsetY = this.currentY * depth;
-        layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, ${depth}px)`;
+        layer.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0px)`;
       }
     });
   }
@@ -144,16 +146,13 @@ class TiltEffect {
     Object.entries(this.layers).forEach(([name, layer]) => {
       if (!layer) return;
       
-      const depth = this.parallaxDepth[name] || 20;
-      
-      // Set to resting position (not empty string) for smooth finish
+      // Clear inline styles to return to original CSS state
       if (layer instanceof NodeList) {
-        layer.forEach((el, i) => {
-          const staggerDepth = depth + (i * 10);
-          el.style.transform = `translate3d(0px, 0px, ${staggerDepth}px)`;
+        layer.forEach(el => {
+          el.style.transform = '';
         });
       } else {
-        layer.style.transform = `translate3d(0px, 0px, ${depth}px)`;
+        layer.style.transform = '';
       }
     });
   }
