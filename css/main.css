@@ -183,7 +183,7 @@ body::before {
 /* Header */
 .header {
   padding: var(--space-xl) 0 var(--space-2xl);
-  margin-top: 40px; /* Clear the fixed site-nav */
+  margin-top: 80px; /* Clear the fixed site-nav + breathing room */
   border-bottom: 1px solid var(--black-border);
   overflow: visible;
 }
@@ -353,7 +353,7 @@ body::before {
   display: block;
   position: absolute;
   right: -580px;
-  top: calc(50% + 40px); /* Offset to clear fixed nav (40px height) */
+  top: 50%;
   transform: translateY(-50%);
   text-decoration: none;
   perspective: 1000px;
