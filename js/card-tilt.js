@@ -13,9 +13,9 @@ class CardTilt {
     this.perspective = 600;
     this.scale = 1.05;
     
-    // Magnet configuration
+    // Magnet configuration (doubled to overcome parallax fighting)
     this.magnetMaxDistance = 150; // pixels - beyond this, no magnet effect
-    this.magnetStrength = 0.4; // how far button moves toward mouse (0-1)
+    this.magnetStrength = 0.8; // how far button moves toward mouse (0-1)
     
     // Parallax layers with depth (dialed back ~30%)
     this.layers = {
