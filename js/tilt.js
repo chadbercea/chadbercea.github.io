@@ -111,7 +111,8 @@ class TiltEffect {
     if (this.isHovering || isMoving) {
       this.animationFrame = requestAnimationFrame(() => this.animate());
     } else {
-      this.browserWindow.style.transform = '';
+      // Animation complete - set final resting transforms (not empty string)
+      this.browserWindow.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
       this.resetParallax();
     }
   }
@@ -143,12 +144,16 @@ class TiltEffect {
     Object.entries(this.layers).forEach(([name, layer]) => {
       if (!layer) return;
       
+      const depth = this.parallaxDepth[name] || 20;
+      
+      // Set to resting position (not empty string) for smooth finish
       if (layer instanceof NodeList) {
-        layer.forEach(el => {
-          el.style.transform = '';
+        layer.forEach((el, i) => {
+          const staggerDepth = depth + (i * 10);
+          el.style.transform = `translate3d(0px, 0px, ${staggerDepth}px)`;
         });
       } else {
-        layer.style.transform = '';
+        layer.style.transform = `translate3d(0px, 0px, ${depth}px)`;
       }
     });
   }
