@@ -53,6 +53,15 @@
       "tags": ["game", "javascript", "tolkien"],
       "status": "active",
       "date": "2023-04"
+    },
+    {
+      "id": "blow-gently",
+      "name": "Blow Gently On Your Screen",
+      "description": "Where I go to find my happy place. Nicolas Cage thanks you.",
+      "url": "https://www.blowgentlyonyourscreen.com/",
+      "tags": ["fun", "nicolas-cage", "vibes"],
+      "status": "active",
+      "date": "2023-01"
     }
   ]
 }
