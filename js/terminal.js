@@ -3,13 +3,10 @@
  * Scrolling logs, command hints, ASCII dividers
  */
 
-// Respect reduced motion preference
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 class TerminalEffects {
   constructor() {
-    // Skip animated logs if user prefers reduced motion
-    this.reducedMotion = prefersReducedMotion;
+    // Check reduced motion preference
+    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     this.logContainer = null;
     this.hintsContainer = null;

@@ -3,13 +3,10 @@
  * Heavy 3D tilt and parallax on project card hover
  */
 
-// Respect reduced motion preference
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 class CardTilt {
   constructor(card) {
     // Skip if user prefers reduced motion
-    if (prefersReducedMotion) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
     this.card = card;
     

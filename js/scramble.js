@@ -3,13 +3,10 @@
  * Terminal-style decode animation on hover
  */
 
-// Respect reduced motion preference
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 class TextScramble {
   constructor(element) {
     // Skip if user prefers reduced motion
-    if (prefersReducedMotion) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     
     this.element = element;
     this.chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/\\~`01';
