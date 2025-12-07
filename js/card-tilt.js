@@ -1,6 +1,7 @@
 /**
  * Card Tilt Effect
  * Heavy 3D tilt and parallax on project card hover
+ * Includes magnet effect on CTA button - attracts toward mouse cursor
  */
 
 class CardTilt {
@@ -12,6 +13,10 @@ class CardTilt {
     this.perspective = 600;
     this.scale = 1.05;
     
+    // Magnet configuration
+    this.magnetMaxDistance = 150; // pixels - beyond this, no magnet effect
+    this.magnetStrength = 0.4; // how far button moves toward mouse (0-1)
+    
     // Parallax layers with depth (dialed back ~30%)
     this.layers = {
       header: { el: card.querySelector('.card__header'), depth: 40 },
@@ -21,11 +26,19 @@ class CardTilt {
       links: { el: card.querySelector('.card__links'), depth: 70 }
     };
     
+    // Button element for magnet effect
+    this.button = card.querySelector('.card__link');
+    
     // State
     this.isHovering = false;
     this.currentRotation = { x: 0, y: 0 };
     this.targetRotation = { x: 0, y: 0 };
     this.animationFrame = null;
+    
+    // Magnet state
+    this.targetMagnet = { x: 0, y: 0 };
+    this.currentMagnet = { x: 0, y: 0 };
+    this.mousePos = { x: 0, y: 0 };
     
     this.init();
   }
@@ -61,6 +74,7 @@ class CardTilt {
   onMouseLeave() {
     this.isHovering = false;
     this.targetRotation = { x: 0, y: 0 };
+    this.targetMagnet = { x: 0, y: 0 };
     this.card.style.zIndex = '';
     
     // If reduced motion enabled, ensure styles are cleared
@@ -75,6 +89,9 @@ class CardTilt {
     if (this.isReducedMotion()) return;
     if (!this.isHovering) return;
     
+    // Store mouse position for magnet calculation
+    this.mousePos = { x: e.clientX, y: e.clientY };
+    
     const rect = this.card.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -88,6 +105,34 @@ class CardTilt {
       x: offsetY * this.maxRotation,
       y: -offsetX * this.maxRotation
     };
+    
+    // Calculate magnet offset for button
+    this.calculateMagnet();
+  }
+  
+  calculateMagnet() {
+    if (!this.button) return;
+    
+    // Get button's current center position
+    const buttonRect = this.button.getBoundingClientRect();
+    const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+    
+    // Vector from button center to mouse
+    const dx = this.mousePos.x - buttonCenterX;
+    const dy = this.mousePos.y - buttonCenterY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    // Magnet strength increases as distance decreases (inverse relationship)
+    // At distance 0, strength is 1. At magnetMaxDistance or beyond, strength is 0.
+    const normalizedDistance = Math.min(distance / this.magnetMaxDistance, 1);
+    const magnetPull = Math.pow(1 - normalizedDistance, 2); // Quadratic falloff for snappier feel
+    
+    // Target offset - button moves toward mouse
+    this.targetMagnet = {
+      x: dx * magnetPull * this.magnetStrength,
+      y: dy * magnetPull * this.magnetStrength
+    };
   }
   
   animate() {
@@ -98,11 +143,15 @@ class CardTilt {
       return;
     }
     
-    // Smooth interpolation
-    const ease = 0.15;
+    // Smooth interpolation for rotation
+    const rotationEase = 0.15;
+    this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * rotationEase;
+    this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * rotationEase;
     
-    this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * ease;
-    this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * ease;
+    // Smooth interpolation for magnet (faster for responsive feel)
+    const magnetEase = 0.2;
+    this.currentMagnet.x += (this.targetMagnet.x - this.currentMagnet.x) * magnetEase;
+    this.currentMagnet.y += (this.targetMagnet.y - this.currentMagnet.y) * magnetEase;
     
     // Calculate scale based on hover
     const currentScale = this.isHovering ? this.scale : 1;
@@ -123,7 +172,9 @@ class CardTilt {
     // Continue animation if hovering or still moving
     const isMoving = 
       Math.abs(this.targetRotation.x - this.currentRotation.x) > 0.01 ||
-      Math.abs(this.targetRotation.y - this.currentRotation.y) > 0.01;
+      Math.abs(this.targetRotation.y - this.currentRotation.y) > 0.01 ||
+      Math.abs(this.targetMagnet.x - this.currentMagnet.x) > 0.01 ||
+      Math.abs(this.targetMagnet.y - this.currentMagnet.y) > 0.01;
     
     if (this.isHovering || isMoving) {
       this.animationFrame = requestAnimationFrame(() => this.animate());
@@ -149,13 +200,21 @@ class CardTilt {
     const rotationFactorX = this.currentRotation.x / this.maxRotation;
     const rotationFactorY = this.currentRotation.y / this.maxRotation;
     
-    Object.values(this.layers).forEach(layer => {
+    Object.entries(this.layers).forEach(([name, layer]) => {
       if (!layer.el) return;
       
+      // Standard parallax movement
       const moveX = rotationFactorY * layer.depth * -1;
       const moveY = rotationFactorX * layer.depth;
       
-      layer.el.style.transform = `translate3d(${moveX}px, ${moveY}px, ${layer.depth}px)`;
+      // For the links layer, add magnet offset
+      if (name === 'links' && this.button) {
+        const totalX = moveX + this.currentMagnet.x;
+        const totalY = moveY + this.currentMagnet.y;
+        layer.el.style.transform = `translate3d(${totalX}px, ${totalY}px, ${layer.depth}px)`;
+      } else {
+        layer.el.style.transform = `translate3d(${moveX}px, ${moveY}px, ${layer.depth}px)`;
+      }
     });
   }
   
@@ -164,6 +223,10 @@ class CardTilt {
       if (!layer.el) return;
       layer.el.style.transform = '';
     });
+    
+    // Reset magnet state
+    this.currentMagnet = { x: 0, y: 0 };
+    this.targetMagnet = { x: 0, y: 0 };
   }
 }
 
