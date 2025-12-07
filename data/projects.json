@@ -4,7 +4,7 @@
       "id": "iliketobuild",
       "name": "I Like To Build",
       "description": "My AI experiments, projects, and blog. Building in public with Claude, Cursor, and whatever comes next.",
-      "url": "https://iliketobuild.io",
+      "url": "https://www.iliketobuild.io/",
       "tags": ["ai", "blog", "experiments"],
       "status": "wip",
       "date": "2024-12"
@@ -31,7 +31,7 @@
       "id": "design-system-lab",
       "name": "Design System Lab",
       "description": "Where I experiment and build with design tokens. Testing patterns, components, and theming approaches.",
-      "url": "https://chadbercea.github.io/design-system-lab",
+      "url": "https://chadbercea.github.io/design-system-lab/",
       "tags": ["design-systems", "tokens", "css"],
       "status": "wip",
       "date": "2024-06"
