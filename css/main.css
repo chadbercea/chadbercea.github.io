@@ -420,6 +420,34 @@ body::before {
   opacity: 0.8;
 }
 
+/* Text-based headline */
+.preview__headline--text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.preview__headline-year {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.preview__headline-title {
+  font-family: var(--font-editorial);
+  font-size: 1.5rem;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.preview__headline-subtitle {
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--white-dim);
+}
+
 /* Description */
 .preview__desc {
   display: flex;
