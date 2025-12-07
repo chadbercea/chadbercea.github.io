@@ -5,8 +5,8 @@
 
 class TerminalEffects {
   constructor() {
-    // Check reduced motion preference
-    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Check if reduce motion is enabled via settings
+    this.reducedMotion = document.documentElement.hasAttribute('data-reduce-motion');
     
     this.logContainer = null;
     this.hintsContainer = null;
@@ -67,7 +67,7 @@ class TerminalEffects {
   
   // 1. Scrolling log output beneath "Personal hub for projects..." copy
   createLogScroller() {
-    // Skip animated logs if user prefers reduced motion
+    // Skip animated logs if reduce motion is enabled
     if (this.reducedMotion) return;
     
     // Insert directly after the header description paragraph, inside header__content

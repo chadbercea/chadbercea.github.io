@@ -5,8 +5,8 @@
 
 class CardTilt {
   constructor(card) {
-    // Skip if user prefers reduced motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Skip if reduce motion is enabled via settings
+    if (document.documentElement.hasAttribute('data-reduce-motion')) return;
     
     this.card = card;
     

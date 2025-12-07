@@ -62,7 +62,7 @@ class Effects {
   }
 
   setupTimestamp() {
-    const timestampEl = document.getElementById('timestamp');
+    const timestampEl = document.getElementById('nav-timestamp');
     if (!timestampEl) return;
 
     const updateTime = () => {

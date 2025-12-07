@@ -37,14 +37,33 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <nav class="site-nav">
+    <div class="site-nav__left">
+      <span class="site-nav__status">●</span>
+      <span class="site-nav__label">ONLINE</span>
+      <span class="site-nav__separator">•</span>
+      <span id="nav-timestamp">loading...</span>
+    </div>
+    <button class="site-nav__settings-btn" aria-label="Settings" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </button>
+    <div class="site-nav__panel" aria-hidden="true">
+      <div class="settings-group">
+        <span class="settings-group__label">ACCESSIBILITY</span>
+        <label class="toggle">
+          <input type="checkbox" id="reduce-motion-toggle">
+          <span class="toggle__slider"></span>
+          <span class="toggle__text">Reduce Motion</span>
+        </label>
+      </div>
+    </div>
+  </nav>
+
   <header class="header">
     <div class="container">
-      <div class="header__top">
-        <span class="header__status">online</span>
-        <span>•</span>
-        <span id="timestamp">loading...</span>
-      </div>
-      
       <div class="header__hero">
         <figure class="header__avatar">
           <img src="/images/Chad-Character-Avatar@2x.png" alt="Chad Bercea character illustration" class="header__avatar-img">
@@ -186,6 +205,7 @@
     </div>
   </footer>
 
+  <script src="js/settings.js"></script>
   <script type="module" src="js/main.js"></script>
   <script src="js/tilt.js"></script>
   <script src="js/scramble.js"></script>
