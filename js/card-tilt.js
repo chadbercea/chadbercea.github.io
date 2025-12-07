@@ -5,9 +5,6 @@
 
 class CardTilt {
   constructor(card) {
-    // Skip if reduce motion is enabled via settings
-    if (document.documentElement.hasAttribute('data-reduce-motion')) return;
-    
     this.card = card;
     
     // Configuration - HEAVY tilt
@@ -33,6 +30,11 @@ class CardTilt {
     this.init();
   }
   
+  // Check if reduce motion is enabled
+  isReducedMotion() {
+    return document.documentElement.hasAttribute('data-reduce-motion');
+  }
+  
   init() {
     // Clear animation so transform works
     this.card.style.animation = 'none';
@@ -48,6 +50,9 @@ class CardTilt {
   }
   
   onMouseEnter() {
+    // Check on every interaction
+    if (this.isReducedMotion()) return;
+    
     this.isHovering = true;
     this.card.style.zIndex = '10';
     this.animate();
@@ -57,9 +62,17 @@ class CardTilt {
     this.isHovering = false;
     this.targetRotation = { x: 0, y: 0 };
     this.card.style.zIndex = '';
+    
+    // If reduced motion enabled, ensure styles are cleared
+    if (this.isReducedMotion()) {
+      this.card.style.transform = '';
+      this.resetParallax();
+    }
   }
   
   onMouseMove(e) {
+    // Check on every interaction
+    if (this.isReducedMotion()) return;
     if (!this.isHovering) return;
     
     const rect = this.card.getBoundingClientRect();
@@ -78,6 +91,13 @@ class CardTilt {
   }
   
   animate() {
+    // Check on every frame
+    if (this.isReducedMotion()) {
+      this.card.style.transform = '';
+      this.resetParallax();
+      return;
+    }
+    
     // Smooth interpolation
     const ease = 0.15;
     
@@ -177,4 +197,3 @@ document.addEventListener('DOMContentLoaded', () => {
   // Also run after a short delay to catch async renders
   setTimeout(initCards, 500);
 });
-

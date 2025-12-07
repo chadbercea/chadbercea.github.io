@@ -5,9 +5,6 @@
 
 class TextScramble {
   constructor(element) {
-    // Skip if reduce motion is enabled via settings
-    if (document.documentElement.hasAttribute('data-reduce-motion')) return;
-    
     this.element = element;
     this.chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/\\~`01';
     this.originalHTML = element.innerHTML;
@@ -17,13 +14,21 @@ class TextScramble {
     this.init();
   }
   
+  // Check if reduce motion is enabled
+  isReducedMotion() {
+    return document.documentElement.hasAttribute('data-reduce-motion');
+  }
+  
   init() {
     this.element.addEventListener('mouseenter', () => this.scramble());
     this.element.style.cursor = 'default';
   }
   
   scramble() {
+    // Check on every interaction
+    if (this.isReducedMotion()) return;
     if (this.isAnimating) return;
+    
     this.isAnimating = true;
     
     // Parse the original HTML to preserve structure (like <br> and <em>)
@@ -37,6 +42,15 @@ class TextScramble {
     const totalFrames = totalChars * framesPerChar;
     
     const animate = () => {
+      // Check on every frame - stop if toggled mid-animation
+      if (this.isReducedMotion()) {
+        textNodes.forEach((node, i) => {
+          node.textContent = originalTexts[i];
+        });
+        this.isAnimating = false;
+        return;
+      }
+      
       frame++;
       const progress = frame / totalFrames;
       
@@ -112,4 +126,3 @@ document.addEventListener('DOMContentLoaded', () => {
     new TextScramble(title);
   }
 });
-

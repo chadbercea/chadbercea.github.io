@@ -5,12 +5,10 @@
 
 class TerminalEffects {
   constructor() {
-    // Check if reduce motion is enabled via settings
-    this.reducedMotion = document.documentElement.hasAttribute('data-reduce-motion');
-    
     this.logContainer = null;
     this.hintsContainer = null;
     this.asciiContainer = null;
+    this.logTimeout = null;
     
     this.logs = [
       '> checking if anyone is reading this...',
@@ -59,6 +57,11 @@ class TerminalEffects {
     this.init();
   }
   
+  // Check if reduce motion is enabled
+  isReducedMotion() {
+    return document.documentElement.hasAttribute('data-reduce-motion');
+  }
+  
   init() {
     this.createLogScroller();
     this.createCommandHints();
@@ -67,9 +70,6 @@ class TerminalEffects {
   
   // 1. Scrolling log output beneath "Personal hub for projects..." copy
   createLogScroller() {
-    // Skip animated logs if reduce motion is enabled
-    if (this.reducedMotion) return;
-    
     // Insert directly after the header description paragraph, inside header__content
     const headerDesc = document.querySelector('.header .header__content > .header__desc');
     if (!headerDesc) return;
@@ -83,9 +83,20 @@ class TerminalEffects {
   }
   
   scheduleNextLog() {
+    // Check on every schedule - if reduced motion, don't add more logs
+    if (this.isReducedMotion()) {
+      // Clear existing logs when toggled
+      if (this.logContainer) {
+        this.logContainer.innerHTML = '';
+      }
+      // Still schedule next check in case toggle is turned off
+      this.logTimeout = setTimeout(() => this.scheduleNextLog(), 2000);
+      return;
+    }
+    
     const delay = Math.random() * 3000 + 1000; // 1-4 seconds
     
-    setTimeout(() => {
+    this.logTimeout = setTimeout(() => {
       this.addLogLine();
       this.scheduleNextLog();
     }, delay);
@@ -93,6 +104,8 @@ class TerminalEffects {
   
   addLogLine() {
     if (!this.logContainer) return;
+    // Double-check reduced motion
+    if (this.isReducedMotion()) return;
     
     const log = this.logs[Math.floor(Math.random() * this.logs.length)];
     const line = document.createElement('div');
@@ -160,4 +173,3 @@ class TerminalEffects {
 document.addEventListener('DOMContentLoaded', () => {
   new TerminalEffects();
 });
-

@@ -5,9 +5,6 @@
 
 class TiltEffect {
   constructor(element) {
-    // Skip if reduce motion is enabled via settings
-    if (document.documentElement.hasAttribute('data-reduce-motion')) return;
-    
     this.element = element;
     this.browserWindow = element.querySelector('.browser-window');
     
@@ -55,6 +52,11 @@ class TiltEffect {
     this.init();
   }
   
+  // Check if reduce motion is enabled
+  isReducedMotion() {
+    return document.documentElement.hasAttribute('data-reduce-motion');
+  }
+  
   init() {
     this.element.addEventListener('mouseenter', () => this.onMouseEnter());
     this.element.addEventListener('mouseleave', () => this.onMouseLeave());
@@ -62,6 +64,9 @@ class TiltEffect {
   }
   
   onMouseEnter() {
+    // Check on every interaction
+    if (this.isReducedMotion()) return;
+    
     this.isHovering = true;
     this.rect = this.element.getBoundingClientRect();
     this.animate();
@@ -71,9 +76,17 @@ class TiltEffect {
     this.isHovering = false;
     this.targetX = 0;
     this.targetY = 0;
+    
+    // If reduced motion enabled, ensure styles are cleared
+    if (this.isReducedMotion()) {
+      this.browserWindow.style.transform = '';
+      this.resetParallax();
+    }
   }
   
   onMouseMove(e) {
+    // Check on every interaction
+    if (this.isReducedMotion()) return;
     if (!this.isHovering || !this.rect) return;
     
     // Calculate position relative to center (-1 to 1)
@@ -85,6 +98,13 @@ class TiltEffect {
   }
   
   animate() {
+    // Check on every frame
+    if (this.isReducedMotion()) {
+      this.browserWindow.style.transform = '';
+      this.resetParallax();
+      return;
+    }
+    
     // Smooth interpolation (matching card easing)
     const ease = 0.08;
     
@@ -116,7 +136,6 @@ class TiltEffect {
       this.animationFrame = requestAnimationFrame(() => this.animate());
     } else {
       // Animation complete and at rest - clear inline styles to return to original state
-      // Use a tiny delay to ensure the final frame rendered at ~0 values
       requestAnimationFrame(() => {
         this.browserWindow.style.transform = '';
         this.resetParallax();
@@ -168,4 +187,3 @@ document.addEventListener('DOMContentLoaded', () => {
     new TiltEffect(featuredElement);
   }
 });
-

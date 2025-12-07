@@ -971,6 +971,30 @@ body::before {
   color: var(--black);
 }
 
+/* Reduced Motion - Manual Toggle */
+[data-reduce-motion] *,
+[data-reduce-motion] *::before,
+[data-reduce-motion] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+[data-reduce-motion] .card,
+[data-reduce-motion] .browser-window,
+[data-reduce-motion] .header__featured {
+  transform: none !important;
+}
+
+[data-reduce-motion] .terminal-logs {
+  display: none !important;
+}
+
+[data-reduce-motion] .blink {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
 /* Footer */
 .footer {
   padding: var(--space-xl) 0;
