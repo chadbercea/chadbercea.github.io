@@ -216,7 +216,7 @@ body::before {
   width: 960px;
   background: var(--black-light);
   border: 1px solid var(--black-border);
-  overflow: hidden;
+  overflow: visible;
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
   transform-style: preserve-3d;
   will-change: transform;
@@ -335,7 +335,7 @@ body::before {
 .preview__logo {
   width: 24px;
   height: 24px;
-  background: var(--white-dim);
+  background: var(--black-border);
   border-radius: 2px;
 }
 
