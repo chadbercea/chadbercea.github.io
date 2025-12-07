@@ -3,8 +3,14 @@
  * Adds mouse-tracking 3D tilt and parallax depth (matching card behavior)
  */
 
+// Respect reduced motion preference
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 class TiltEffect {
   constructor(element) {
+    // Skip if user prefers reduced motion
+    if (prefersReducedMotion) return;
+    
     this.element = element;
     this.browserWindow = element.querySelector('.browser-window');
     

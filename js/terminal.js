@@ -3,8 +3,14 @@
  * Scrolling logs, command hints, ASCII dividers
  */
 
+// Respect reduced motion preference
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 class TerminalEffects {
   constructor() {
+    // Skip animated logs if user prefers reduced motion
+    this.reducedMotion = prefersReducedMotion;
+    
     this.logContainer = null;
     this.hintsContainer = null;
     this.asciiContainer = null;
@@ -64,6 +70,9 @@ class TerminalEffects {
   
   // 1. Scrolling log output beneath "Personal hub for projects..." copy
   createLogScroller() {
+    // Skip animated logs if user prefers reduced motion
+    if (this.reducedMotion) return;
+    
     // Insert directly after the header description paragraph, inside header__content
     const headerDesc = document.querySelector('.header .header__content > .header__desc');
     if (!headerDesc) return;
