@@ -980,10 +980,17 @@ body::before {
   transition-duration: 0.01ms !important;
 }
 
-[data-reduce-motion] .card,
-[data-reduce-motion] .browser-window,
-[data-reduce-motion] .header__featured {
+[data-reduce-motion] .card {
   transform: none !important;
+}
+
+[data-reduce-motion] .browser-window {
+  transform: none !important;
+}
+
+/* Keep the centering transform, just remove tilt */
+[data-reduce-motion] .header__featured {
+  transform: translateY(-50%) !important;
 }
 
 [data-reduce-motion] .terminal-logs {
