@@ -1,37 +1,49 @@
 {
   "projects": [
     {
-      "id": "example-project",
-      "name": "Example Project",
-      "description": "A placeholder project to demonstrate the card layout. Replace with your actual projects.",
-      "tagline": "A showcase of the editorial hacker design system",
-      "overview": "This is an **example project** demonstrating the full detail page layout.\n\nIt showcases:\n\n- Markdown rendering with `marked.js`\n- The editorial hacker aesthetic\n- Responsive design patterns\n- Project navigation flow\n\n### Technical Details\n\nBuilt with vanilla HTML, CSS, and JavaScript. No build step required — just deploy to GitHub Pages.\n\nThe design system emphasizes:\n\n1. Strong typographic hierarchy\n2. Terminal-inspired UI elements\n3. Electric green accent on deep black\n4. Generous whitespace",
-      "url": "https://chadbercea.github.io/example",
-      "repo": "https://github.com/chadbercea/example",
-      "tags": ["javascript", "css", "design-system"],
+      "id": "focusdoro",
+      "name": "FocusDoro.io",
+      "description": "A minimal pomodoro timer PWA. Clean interface, zero distractions, works offline.",
+      "url": "https://focusdoro.io",
+      "tags": ["pwa", "productivity", "javascript"],
       "status": "active",
-      "date": "2024-01",
-      "updated": "2024-12"
+      "date": "2024-01"
     },
     {
-      "id": "another-project",
-      "name": "Another Project",
-      "description": "Another placeholder. This one has a longer description to show how text wraps and truncates in the card layout.",
-      "url": "https://example.com",
-      "repo": "https://github.com/chadbercea/another",
-      "tags": ["python", "api", "tool"],
+      "id": "i-like-to-play",
+      "name": "I Like To Play",
+      "description": "Mobile-first retro game collecting app. Track your collection, wishlist, and trades.",
+      "url": "https://iliketoplay.app",
+      "tags": ["mobile", "react", "gaming"],
+      "status": "active",
+      "date": "2024-03"
+    },
+    {
+      "id": "design-system-lab",
+      "name": "Design System Lab",
+      "description": "Where I experiment and build with design tokens. Testing patterns, components, and theming approaches.",
+      "url": "https://chadbercea.github.io/design-system-lab",
+      "tags": ["design-systems", "tokens", "css"],
       "status": "wip",
-      "date": "2024-02"
+      "date": "2024-06"
     },
     {
-      "id": "archived-thing",
-      "name": "Archived Thing",
-      "description": "An old project that's no longer maintained but still worth showing.",
-      "url": null,
-      "repo": "https://github.com/chadbercea/archived",
-      "tags": ["rust", "cli"],
-      "status": "archived",
-      "date": "2023-06"
+      "id": "json-pokemon",
+      "name": "JSON Pokemon",
+      "description": "Generate events as test data for building apps. Pokémon-themed mock data generator.",
+      "url": "https://chadbercea.github.io/json-pokemon",
+      "tags": ["tool", "api", "testing"],
+      "status": "active",
+      "date": "2023-09"
+    },
+    {
+      "id": "middle-earth-merchants",
+      "name": "Middle Earth Merchants",
+      "description": "A trading game based on Drug Wars, set in Tolkien's world. Buy low in the Shire, sell high in Mordor.",
+      "url": "https://chadbercea.github.io/middle-earth-merchants",
+      "tags": ["game", "javascript", "tolkien"],
+      "status": "active",
+      "date": "2023-04"
     }
   ]
 }
