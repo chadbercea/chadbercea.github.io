@@ -1109,8 +1109,6 @@ body::before {
   gap: var(--space-lg);
   transform: perspective(1000px) rotateY(-8deg) rotateX(5deg);
   transform-style: preserve-3d;
-  width: 100%;
-  max-width: 1200px;
 }
 
 .dribbble__cell {
