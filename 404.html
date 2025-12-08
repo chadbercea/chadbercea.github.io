@@ -416,72 +416,69 @@
       errorCode.addEventListener('mouseenter', runGlitch);
     }
     
-    // Terminal window parallax/tilt effect
+    // Terminal tilt effect - using exact same rotation math as tilt.js
     const terminal = document.getElementById('terminal-window');
     if (terminal) {
-      const maxRotation = 15;
-      const perspective = 800;
-      let currentRotation = { x: 0, y: 0 };
-      let targetRotation = { x: 0, y: 0 };
+      const maxRotation = 12;
+      const scale = 1.02;
+      const ease = 0.08;
+      let rect = null;
       let isHovering = false;
+      let currentX = 0, currentY = 0;
+      let targetX = 0, targetY = 0;
       let animationFrame = null;
-      
-      terminal.style.perspective = perspective + 'px';
       
       terminal.addEventListener('mouseenter', () => {
         isHovering = true;
+        rect = terminal.getBoundingClientRect();
         animate();
       });
       
       terminal.addEventListener('mouseleave', () => {
         isHovering = false;
-        targetRotation = { x: 0, y: 0 };
+        targetX = 0;
+        targetY = 0;
       });
       
       terminal.addEventListener('mousemove', (e) => {
-        if (!isHovering) return;
-        const rect = terminal.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const offsetX = (e.clientX - centerX) / (rect.width / 2);
-        const offsetY = (e.clientY - centerY) / (rect.height / 2);
-        // Tilt TOWARD mouse (negate both for correct direction)
-        targetRotation = {
-          x: -offsetY * maxRotation,
-          y: offsetX * maxRotation
-        };
+        if (!isHovering || !rect) return;
+        // Same calculation as tilt.js
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+        targetX = x / (rect.width / 2);
+        targetY = y / (rect.height / 2);
       });
       
       function animate() {
-        const ease = 0.12;
-        currentRotation.x += (targetRotation.x - currentRotation.x) * ease;
-        currentRotation.y += (targetRotation.y - currentRotation.y) * ease;
+        currentX += (targetX - currentX) * ease;
+        currentY += (targetY - currentY) * ease;
         
-        const scale = isHovering ? 1.02 : 1;
+        // Same rotation as tilt.js line 115-116
+        const rotateX = -currentY * maxRotation;
+        const rotateY = currentX * maxRotation;
+        const currentScale = isHovering ? scale : 1;
+        
         terminal.style.transform = `
-          rotateX(${currentRotation.x}deg)
-          rotateY(${currentRotation.y}deg)
-          scale(${scale})
+          scale(${currentScale})
+          rotateX(${rotateX}deg)
+          rotateY(${rotateY}deg)
         `;
         
         // Parallax on inner body
         const body = terminal.querySelector('.error-page__terminal-body');
         if (body) {
           const depth = 30;
-          const moveX = (currentRotation.y / maxRotation) * depth * -1;
-          const moveY = (currentRotation.x / maxRotation) * depth;
-          body.style.transform = `translate3d(${moveX}px, ${moveY}px, 20px)`;
+          body.style.transform = `translate3d(${currentX * depth}px, ${currentY * depth}px, 20px)`;
         }
         
         const isMoving = 
-          Math.abs(targetRotation.x - currentRotation.x) > 0.01 ||
-          Math.abs(targetRotation.y - currentRotation.y) > 0.01;
+          Math.abs(targetX - currentX) > 0.001 ||
+          Math.abs(targetY - currentY) > 0.001;
         
         if (isHovering || isMoving) {
           animationFrame = requestAnimationFrame(animate);
         } else {
           terminal.style.transform = '';
-          const body = terminal.querySelector('.error-page__terminal-body');
           if (body) body.style.transform = '';
         }
       }
