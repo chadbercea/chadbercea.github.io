@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="404 - Page not found">
+  <meta name="author" content="Chad Bercea">
+  <title>404 — chadbercea</title>
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/favicon-192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/favicon-180x180.png">
+  
+  <!-- Theme -->
+  <meta name="theme-color" content="#050505">
+  
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/main.css">
+  
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-xl);
+    }
+    
+    .error-page__code {
+      font-family: var(--font-mono);
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: var(--space-md);
+      text-shadow: 0 0 60px rgba(0, 255, 65, 0.3);
+    }
+    
+    .error-page__terminal {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--white-dim);
+      margin-bottom: var(--space-xl);
+      max-width: 500px;
+    }
+    
+    .error-page__terminal-line {
+      margin-bottom: var(--space-xs);
+    }
+    
+    .error-page__terminal-line .prompt {
+      color: var(--accent);
+    }
+    
+    .error-page__terminal-line .error {
+      color: #ff6b6b;
+    }
+    
+    .error-page__terminal-line .path {
+      color: var(--white-dimmer);
+    }
+    
+    .error-page__message {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--white);
+      margin-bottom: var(--space-lg);
+      font-style: italic;
+    }
+    
+    .error-page__desc {
+      color: var(--white-dim);
+      margin-bottom: var(--space-xl);
+      max-width: 400px;
+    }
+    
+    .error-page__link {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-decoration: none;
+      padding: var(--space-sm) var(--space-lg);
+      border: 1px solid var(--accent);
+      transition: all var(--transition-fast);
+    }
+    
+    .error-page__link:hover {
+      background: var(--accent);
+      color: var(--black);
+    }
+    
+    .error-page__ascii {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      color: var(--black-border);
+      margin-top: var(--space-2xl);
+      white-space: pre;
+      line-height: 1.2;
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="site-nav__left">
+      <span class="site-nav__status" style="color: #ff6b6b;">●</span>
+      <span class="site-nav__label">ERROR</span>
+      <span class="site-nav__separator">•</span>
+      <span id="nav-timestamp">loading...</span>
+    </div>
+    <a href="/" class="site-nav__settings-btn" aria-label="Home" style="text-decoration: none;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+    </a>
+  </nav>
+
+  <main class="error-page">
+    <div class="error-page__code">404</div>
+    
+    <div class="error-page__terminal">
+      <div class="error-page__terminal-line">
+        <span class="prompt">$</span> cd <span class="path" id="current-path">/unknown</span>
+      </div>
+      <div class="error-page__terminal-line">
+        <span class="error">[ERROR]</span> route not found
+      </div>
+      <div class="error-page__terminal-line">
+        <span class="prompt">$</span> ls -la
+      </div>
+      <div class="error-page__terminal-line">
+        total 0
+      </div>
+      <div class="error-page__terminal-line">
+        <span class="prompt">$</span> <span class="cursor"></span>
+      </div>
+    </div>
+    
+    <h1 class="error-page__message">Nothing here but tumbleweeds</h1>
+    
+    <p class="error-page__desc">
+      The page you're looking for has either moved, been deleted, or never existed in the first place.
+    </p>
+    
+    <a href="/" class="error-page__link">← Back to Home</a>
+    
+    <div class="error-page__ascii" aria-hidden="true">
+    ╔═══════════════════════════════╗
+    ║  have you tried turning it    ║
+    ║  off and on again?            ║
+    ╚═══════════════════════════════╝
+    </div>
+  </main>
+
+  <script>
+    // Update timestamp
+    const timestampEl = document.getElementById('nav-timestamp');
+    if (timestampEl) {
+      const updateTime = () => {
+        const now = new Date();
+        const formatted = now.toISOString().slice(0, 19).replace('T', ' ');
+        timestampEl.textContent = formatted + ' UTC';
+      };
+      updateTime();
+      setInterval(updateTime, 1000);
+    }
+    
+    // Show attempted path
+    const pathEl = document.getElementById('current-path');
+    if (pathEl && window.location.pathname !== '/404.html') {
+      pathEl.textContent = window.location.pathname;
+    }
+  </script>
+</body>
+</html>
+
