@@ -49,7 +49,8 @@
       transition: text-shadow var(--transition-fast);
     }
     
-    .error-page__code:hover {
+    .error-page__code:hover,
+    .error-page__code.glitching {
       text-shadow: 
         0 0 80px rgba(0, 255, 65, 0.5),
         -2px 0 #ff6b6b,
@@ -309,38 +310,53 @@
       pathEl.textContent = window.location.pathname;
     }
     
-    // Glitch scramble effect on 404 hover
+    // Glitch scramble effect on 404 - auto-plays on loop
     const errorCode = document.getElementById('error-code');
-    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/\\~`0123456789';
+    const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?/\\~`0123456789ABCDEF';
     let isScrambling = false;
     
+    function runGlitch() {
+      if (isScrambling) return;
+      isScrambling = true;
+      
+      const original = '404';
+      let iterations = 0;
+      const maxIterations = 60; // 3 seconds at 50ms intervals
+      
+      // Add glitch class for CSS animation
+      errorCode.classList.add('glitching');
+      
+      const scramble = setInterval(() => {
+        errorCode.textContent = original
+          .split('')
+          .map((char, index) => {
+            // Randomly show original or scrambled
+            if (Math.random() > 0.3) return char;
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join('');
+        
+        iterations++;
+        
+        if (iterations > maxIterations) {
+          clearInterval(scramble);
+          errorCode.textContent = original;
+          errorCode.classList.remove('glitching');
+          isScrambling = false;
+        }
+      }, 50);
+    }
+    
     if (errorCode) {
-      errorCode.addEventListener('mouseenter', () => {
-        if (isScrambling) return;
-        isScrambling = true;
-        
-        const original = '404';
-        let iterations = 0;
-        const maxIterations = 10;
-        
-        const scramble = setInterval(() => {
-          errorCode.textContent = original
-            .split('')
-            .map((char, index) => {
-              if (iterations > index * 3) return char;
-              return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join('');
-          
-          iterations++;
-          
-          if (iterations > maxIterations) {
-            clearInterval(scramble);
-            errorCode.textContent = original;
-            isScrambling = false;
-          }
-        }, 50);
-      });
+      // Initial delay then start loop
+      setTimeout(() => {
+        runGlitch();
+        // Loop: 3s glitch + 5s pause = 8s cycle
+        setInterval(runGlitch, 8000);
+      }, 1000);
+      
+      // Also trigger on hover for extra interaction
+      errorCode.addEventListener('mouseenter', runGlitch);
     }
   </script>
 </body>
