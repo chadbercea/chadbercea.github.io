@@ -66,21 +66,26 @@
       80% { transform: translate(1px, 1px); }
     }
     
-    .error-page__terminal {
+    .error-page__terminal-wrapper {
       margin-bottom: var(--space-xl);
       max-width: 500px;
       width: 100%;
+      perspective: 1000px;
+    }
+    
+    .error-page__terminal {
       text-align: left;
       background: var(--black-light);
       border: 1px solid var(--black-border);
       border-radius: 8px;
       overflow: visible;
       transform-style: preserve-3d;
-      transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease;
       cursor: default;
+      will-change: transform;
     }
     
-    .error-page__terminal:hover {
+    .error-page__terminal-wrapper:hover .error-page__terminal {
       box-shadow: 0 8px 32px rgba(0, 255, 65, 0.15);
     }
     
@@ -305,8 +310,9 @@
   <main class="error-page">
     <div class="error-page__code" id="error-code">404</div>
     
-    <div class="error-page__terminal" id="terminal-window">
-      <div class="error-page__terminal-chrome">
+    <div class="error-page__terminal-wrapper" id="terminal-wrapper">
+      <div class="error-page__terminal" id="terminal-window">
+        <div class="error-page__terminal-chrome">
         <div class="error-page__terminal-dots">
           <span class="error-page__terminal-dot error-page__terminal-dot--red"></span>
           <span class="error-page__terminal-dot error-page__terminal-dot--yellow"></span>
@@ -330,6 +336,7 @@
         <div class="error-page__terminal-line">
           <span class="prompt">$</span> <span class="blink">█</span>
         </div>
+      </div>
       </div>
     </div>
     
@@ -416,9 +423,12 @@
       errorCode.addEventListener('mouseenter', runGlitch);
     }
     
-    // Terminal tilt effect - using exact same rotation math as tilt.js
+    // Terminal tilt effect - matching tilt.js structure exactly
+    // wrapper = mouse tracking, terminal = transform target (like .header__featured → .browser-window)
+    const wrapper = document.getElementById('terminal-wrapper');
     const terminal = document.getElementById('terminal-window');
-    if (terminal) {
+    
+    if (wrapper && terminal) {
       const maxRotation = 12;
       const scale = 1.02;
       const ease = 0.08;
@@ -428,21 +438,21 @@
       let targetX = 0, targetY = 0;
       let animationFrame = null;
       
-      terminal.addEventListener('mouseenter', () => {
+      // Mouse events on WRAPPER (like .header__featured)
+      wrapper.addEventListener('mouseenter', () => {
         isHovering = true;
-        rect = terminal.getBoundingClientRect();
+        rect = wrapper.getBoundingClientRect();
         animate();
       });
       
-      terminal.addEventListener('mouseleave', () => {
+      wrapper.addEventListener('mouseleave', () => {
         isHovering = false;
         targetX = 0;
         targetY = 0;
       });
       
-      terminal.addEventListener('mousemove', (e) => {
+      wrapper.addEventListener('mousemove', (e) => {
         if (!isHovering || !rect) return;
-        // Same calculation as tilt.js
         const x = e.clientX - (rect.left + rect.width / 2);
         const y = e.clientY - (rect.top + rect.height / 2);
         targetX = x / (rect.width / 2);
@@ -453,11 +463,12 @@
         currentX += (targetX - currentX) * ease;
         currentY += (targetY - currentY) * ease;
         
-        // Same rotation as tilt.js line 115-116
+        // Same rotation as tilt.js
         const rotateX = -currentY * maxRotation;
         const rotateY = currentX * maxRotation;
         const currentScale = isHovering ? scale : 1;
         
+        // Transform on TERMINAL (like .browser-window)
         terminal.style.transform = `
           scale(${currentScale})
           rotateX(${rotateX}deg)
