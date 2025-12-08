@@ -1105,15 +1105,16 @@ body::before {
 
 .dribbble__grid {
   display: grid;
-  grid-template-columns: repeat(3, 120px);
-  gap: var(--space-md);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
   transform: perspective(1000px) rotateY(-8deg) rotateX(5deg);
   transform-style: preserve-3d;
+  width: 100%;
+  max-width: 600px;
 }
 
 .dribbble__cell {
   aspect-ratio: 1;
-  width: 120px;
   background: var(--black-lighter);
   border: 1px solid var(--black-border);
   position: relative;
@@ -1174,12 +1175,8 @@ body::before {
   
   .dribbble__grid {
     transform: none;
-    grid-template-columns: repeat(3, 80px);
-    justify-content: center;
-  }
-  
-  .dribbble__cell {
-    width: 80px;
+    max-width: 400px;
+    margin: 0 auto;
   }
 }
 
