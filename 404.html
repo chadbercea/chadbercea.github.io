@@ -71,6 +71,8 @@
       max-width: 500px;
       width: 100%;
       perspective: 1000px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.7s forwards;
     }
     
     .error-page__terminal {
@@ -138,11 +140,11 @@
       animation: terminalFadeIn 0.4s ease forwards;
     }
     
-    .error-page__terminal-line:nth-child(1) { animation-delay: 0.2s; }
-    .error-page__terminal-line:nth-child(2) { animation-delay: 0.5s; }
-    .error-page__terminal-line:nth-child(3) { animation-delay: 0.9s; }
-    .error-page__terminal-line:nth-child(4) { animation-delay: 1.2s; }
-    .error-page__terminal-line:nth-child(5) { animation-delay: 1.5s; }
+    .error-page__terminal-line:nth-child(1) { animation-delay: 0.8s; }
+    .error-page__terminal-line:nth-child(2) { animation-delay: 1.1s; }
+    .error-page__terminal-line:nth-child(3) { animation-delay: 1.5s; }
+    .error-page__terminal-line:nth-child(4) { animation-delay: 1.8s; }
+    .error-page__terminal-line:nth-child(5) { animation-delay: 2.1s; }
     
     @keyframes terminalFadeIn {
       to {
@@ -174,7 +176,7 @@
       margin-bottom: var(--space-md);
       font-style: italic;
       opacity: 0;
-      animation: fadeUp 0.6s ease 1.8s forwards;
+      animation: fadeUp 0.6s ease 0.3s forwards;
     }
     
     .error-page__desc {
@@ -184,7 +186,7 @@
       max-width: 400px;
       line-height: 1.6;
       opacity: 0;
-      animation: fadeUp 0.6s ease 2s forwards;
+      animation: fadeUp 0.6s ease 0.5s forwards;
     }
     
     @keyframes fadeUp {
@@ -209,7 +211,7 @@
       border: 1px solid var(--accent);
       transition: all var(--transition-fast);
       opacity: 0;
-      animation: fadeUp 0.6s ease 2.2s forwards;
+      animation: fadeUp 0.6s ease 2.4s forwards;
       position: relative;
       overflow: hidden;
     }
@@ -242,7 +244,7 @@
       white-space: pre;
       line-height: 1.3;
       opacity: 0;
-      animation: fadeUp 0.6s ease 2.5s forwards;
+      animation: fadeUp 0.6s ease 2.7s forwards;
       transition: color var(--transition-fast);
     }
     
@@ -310,41 +312,41 @@
   <main class="error-page">
     <div class="error-page__code" id="error-code">404</div>
     
-    <div class="error-page__terminal-wrapper" id="terminal-wrapper">
-      <div class="error-page__terminal" id="terminal-window">
-        <div class="error-page__terminal-chrome">
-        <div class="error-page__terminal-dots">
-          <span class="error-page__terminal-dot error-page__terminal-dot--red"></span>
-          <span class="error-page__terminal-dot error-page__terminal-dot--yellow"></span>
-          <span class="error-page__terminal-dot error-page__terminal-dot--green"></span>
-        </div>
-        <span class="error-page__terminal-title">bash — 404</span>
-      </div>
-      <div class="error-page__terminal-body">
-        <div class="error-page__terminal-line">
-          <span class="prompt">$</span> <span class="cmd">cd</span> <span class="path" id="current-path">/unknown</span>
-        </div>
-        <div class="error-page__terminal-line">
-          <span class="error">[ERROR]</span> route not found
-        </div>
-        <div class="error-page__terminal-line">
-          <span class="prompt">$</span> <span class="cmd">ls -la</span>
-        </div>
-        <div class="error-page__terminal-line">
-          total 0
-        </div>
-        <div class="error-page__terminal-line">
-          <span class="prompt">$</span> <span class="blink">█</span>
-        </div>
-      </div>
-      </div>
-    </div>
-    
     <h1 class="error-page__message">Nothing here but tumbleweeds</h1>
     
     <p class="error-page__desc">
       The page you're looking for has either moved, been deleted, or never existed in the first place.
     </p>
+    
+    <div class="error-page__terminal-wrapper" id="terminal-wrapper">
+      <div class="error-page__terminal" id="terminal-window">
+        <div class="error-page__terminal-chrome">
+          <div class="error-page__terminal-dots">
+            <span class="error-page__terminal-dot error-page__terminal-dot--red"></span>
+            <span class="error-page__terminal-dot error-page__terminal-dot--yellow"></span>
+            <span class="error-page__terminal-dot error-page__terminal-dot--green"></span>
+          </div>
+          <span class="error-page__terminal-title">bash — 404</span>
+        </div>
+        <div class="error-page__terminal-body">
+          <div class="error-page__terminal-line">
+            <span class="prompt">$</span> <span class="cmd">cd</span> <span class="path" id="current-path">/unknown</span>
+          </div>
+          <div class="error-page__terminal-line">
+            <span class="error">[ERROR]</span> route not found
+          </div>
+          <div class="error-page__terminal-line">
+            <span class="prompt">$</span> <span class="cmd">ls -la</span>
+          </div>
+          <div class="error-page__terminal-line">
+            total 0
+          </div>
+          <div class="error-page__terminal-line">
+            <span class="prompt">$</span> <span class="blink">█</span>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <a href="/" class="error-page__link">← Back to Home</a>
     
