@@ -1105,12 +1105,12 @@ body::before {
 
 .dribbble__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 200px);
   gap: var(--space-lg);
   transform: perspective(1000px) rotateY(-8deg) rotateX(5deg);
   transform-style: preserve-3d;
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
 }
 
 .dribbble__cell {
