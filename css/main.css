@@ -1113,46 +1113,22 @@ body::before {
 }
 
 .dribbble__cell {
-  aspect-ratio: 12/6;
+  aspect-ratio: 4/3;
   background: var(--black-lighter);
+  background-size: cover;
+  background-position: center;
   border: 1px solid var(--black-border);
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-base);
-}
-
-.dribbble__cell::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--black-border);
-  border-radius: 50%;
-  opacity: 0.5;
-}
-
-.dribbble__cell::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, transparent 0%, rgba(0, 255, 65, 0.05) 100%);
-  opacity: 0;
-  transition: opacity var(--transition-base);
+  filter: brightness(0.05) grayscale(0.2);
+  transition: filter 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+  transform-style: preserve-3d;
 }
 
 .dribbble__cell:hover {
+  filter: brightness(1) grayscale(0);
   border-color: var(--accent);
-  transform: translateZ(20px);
-}
-
-.dribbble__cell:hover::before {
-  opacity: 1;
+  transform: translateZ(20px) rotateX(-2deg) rotateY(3deg) scale(1.02);
 }
 
 /* Cells are visible by default - no animation needed */
