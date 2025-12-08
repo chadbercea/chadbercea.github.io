@@ -1114,7 +1114,7 @@ body::before {
 }
 
 .dribbble__cell {
-  aspect-ratio: 1;
+  aspect-ratio: 12/6;
   background: var(--black-lighter);
   border: 1px solid var(--black-border);
   position: relative;
