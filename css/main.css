@@ -1014,10 +1014,8 @@ body::before {
 .dribbble__container {
   max-width: var(--content-width);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
-  align-items: center;
+  position: relative;
+  min-height: 600px;
 }
 
 .dribbble__content {
@@ -1100,7 +1098,10 @@ body::before {
 
 /* Dribbble Visual Grid */
 .dribbble__visual {
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .dribbble__grid {
