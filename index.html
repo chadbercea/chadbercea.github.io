@@ -171,21 +171,20 @@
     </div>
   </header>
 
-  <nav class="nav">
-    <div class="container">
-      <div class="nav__inner">
-        <div class="nav__filters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="active">Active</button>
-          <button class="filter-btn" data-filter="wip">WIP</button>
-          <button class="filter-btn" data-filter="archived">Archived</button>
-        </div>
-        <span class="nav__count" id="project-count">Loading...</span>
-      </div>
-    </div>
-  </nav>
-
   <main class="projects">
+    <nav class="nav">
+      <div class="container">
+        <div class="nav__inner">
+          <div class="nav__filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="active">Active</button>
+            <button class="filter-btn" data-filter="wip">WIP</button>
+            <button class="filter-btn" data-filter="archived">Archived</button>
+          </div>
+          <span class="nav__count" id="project-count">Loading...</span>
+        </div>
+      </div>
+    </nav>
     <div class="container">
       <div class="projects__grid" id="projects-grid">
         <div class="loading">> Fetching projects...</div>
@@ -205,15 +204,30 @@
       </div>
       <div class="dribbble__visual">
         <div class="dribbble__grid">
-          <a href="https://dribbble.com/shots/23139059-Hero-Cards" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/1.webp')"></a>
-          <a href="https://dribbble.com/shots/23673615-3D-Illustrations-are-Fun" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/2.webp')"></a>
-          <a href="https://dribbble.com/shots/23139046-Something-new" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/3.webp')"></a>
-          <a href="https://dribbble.com/shots/16531035-Homepage-Revisions-Sections" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/4.webp')"></a>
-          <a href="https://dribbble.com/shots/16470958-Free-form-Modals" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/5.webp')"></a>
-          <a href="https://dribbble.com/shots/14551523-LogDNA-Homepage-Presentation" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/6.webp')"></a>
-          <a href="https://dribbble.com/shots/14642531-Behold-An-Early-Histogram-Mockup" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/7.webp')"></a>
-          <a href="https://dribbble.com/shots/14551923-I-don-t-even-know-it-looks-cool" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/8.webp')"></a>
-          <a href="https://dribbble.com/shots/14551516-Homepage-Idea" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/9.webp')"></a>
+          <div class="dribbble__row dribbble__row--ltr">
+            <a href="https://dribbble.com/shots/23139059-Hero-Cards" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/1.webp')"></a>
+            <a href="https://dribbble.com/shots/23673615-3D-Illustrations-are-Fun" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/2.webp')"></a>
+            <a href="https://dribbble.com/shots/23139046-Something-new" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/3.webp')"></a>
+            <a href="https://dribbble.com/shots/23139059-Hero-Cards" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/1.webp')"></a>
+            <a href="https://dribbble.com/shots/23673615-3D-Illustrations-are-Fun" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/2.webp')"></a>
+            <a href="https://dribbble.com/shots/23139046-Something-new" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/3.webp')"></a>
+          </div>
+          <div class="dribbble__row dribbble__row--rtl">
+            <a href="https://dribbble.com/shots/16531035-Homepage-Revisions-Sections" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/4.webp')"></a>
+            <a href="https://dribbble.com/shots/16470958-Free-form-Modals" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/5.webp')"></a>
+            <a href="https://dribbble.com/shots/14551523-LogDNA-Homepage-Presentation" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/6.webp')"></a>
+            <a href="https://dribbble.com/shots/16531035-Homepage-Revisions-Sections" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/4.webp')"></a>
+            <a href="https://dribbble.com/shots/16470958-Free-form-Modals" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/5.webp')"></a>
+            <a href="https://dribbble.com/shots/14551523-LogDNA-Homepage-Presentation" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/6.webp')"></a>
+          </div>
+          <div class="dribbble__row dribbble__row--ltr">
+            <a href="https://dribbble.com/shots/14642531-Behold-An-Early-Histogram-Mockup" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/7.webp')"></a>
+            <a href="https://dribbble.com/shots/14551923-I-don-t-even-know-it-looks-cool" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/8.webp')"></a>
+            <a href="https://dribbble.com/shots/14551516-Homepage-Idea" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/9.webp')"></a>
+            <a href="https://dribbble.com/shots/14642531-Behold-An-Early-Histogram-Mockup" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/7.webp')"></a>
+            <a href="https://dribbble.com/shots/14551923-I-don-t-even-know-it-looks-cool" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/8.webp')"></a>
+            <a href="https://dribbble.com/shots/14551516-Homepage-Idea" target="_blank" rel="noopener" class="dribbble__cell" style="background-image: url('images/dribbble-shots/9.webp')"></a>
+          </div>
         </div>
       </div>
     </div>
