@@ -1005,7 +1005,7 @@ body::before {
 
 /* Dribbble Section */
 .dribbble {
-  padding: var(--space-2xl) 0;
+  padding: 0;
   background: var(--black);
   border-top: 1px solid var(--black-border);
   position: relative;
