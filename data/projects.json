@@ -10,13 +10,13 @@
       "date": "2025-12"
     },
     {
-      "id": "iliketobuild",
-      "name": "I Like To Build",
-      "description": "My AI experiments, projects, and blog. Building in public with Claude, Cursor, and whatever comes next.",
-      "url": "https://www.iliketobuild.io/",
-      "tags": ["ai", "blog", "experiments"],
+      "id": "design-system-lab",
+      "name": "Design System Lab",
+      "description": "Where I experiment and build with design tokens. Testing patterns, components, and theming approaches.",
+      "url": "https://chadbercea.github.io/design-system-lab/",
+      "tags": ["design-systems", "tokens", "css"],
       "status": "wip",
-      "date": "2024-12"
+      "date": "2025-06"
     },
     {
       "id": "focusdoro",
@@ -28,6 +28,15 @@
       "date": "2024-01"
     },
     {
+      "id": "iliketobuild",
+      "name": "I Like To Build",
+      "description": "My AI experiments, projects, and blog. Building in public with Claude, Cursor, and whatever comes next.",
+      "url": "https://www.iliketobuild.io/",
+      "tags": ["ai", "blog", "experiments"],
+      "status": "wip",
+      "date": "2024-12"
+    },
+    {
       "id": "i-like-to-play",
       "name": "I Like To Play",
       "description": "Mobile-first retro game collecting app. Track your collection, wishlist, and trades.",
@@ -35,15 +44,6 @@
       "tags": ["mobile", "react", "gaming"],
       "status": "active",
       "date": "2024-03"
-    },
-    {
-      "id": "design-system-lab",
-      "name": "Design System Lab",
-      "description": "Where I experiment and build with design tokens. Testing patterns, components, and theming approaches.",
-      "url": "https://chadbercea.github.io/design-system-lab/",
-      "tags": ["design-systems", "tokens", "css"],
-      "status": "wip",
-      "date": "2025-06"
     },
     {
       "id": "json-pokemon",
