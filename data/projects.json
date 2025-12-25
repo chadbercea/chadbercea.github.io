@@ -1,6 +1,15 @@
 {
   "projects": [
     {
+      "id": "warframe-clock",
+      "name": "Warframe Clock",
+      "description": "In-world game clock for Earth in Warframe. Track day/night cycles to plan your missions.",
+      "url": "https://warframeclocx.com/",
+      "tags": ["warframe", "gaming", "tool"],
+      "status": "active",
+      "date": "2024-12"
+    },
+    {
       "id": "iliketobuild",
       "name": "I Like To Build",
       "description": "My AI experiments, projects, and blog. Building in public with Claude, Cursor, and whatever comes next.",
