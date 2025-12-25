@@ -1017,6 +1017,8 @@ body::before {
   margin: 0 auto;
   position: relative;
   min-height: 1200px;
+  display: flex;
+  align-items: center;
 }
 
 .dribbble__content {
