@@ -255,6 +255,100 @@
     </div>
   </section>
 
+  <section class="experiment">
+    <div class="experiment__container">
+      <div class="experiment__content">
+        <span class="experiment__prompt">$ docker run --interactive</span>
+        <h2 class="experiment__title">Docker Image <em>Runner</em></h2>
+        <p class="experiment__desc">A Three.js experiment exploring 3D visualization of Docker containers with real-time metrics, interactive controls, and a cyberpunk-inspired interface.</p>
+        <div class="experiment__tags">
+          <span class="experiment__tag">Three.js</span>
+          <span class="experiment__tag">WebGL</span>
+          <span class="experiment__tag">3D</span>
+          <span class="experiment__tag">UI Experiment</span>
+        </div>
+        <a href="https://chadbercea.github.io/design-system-lab/docker-image-runner/" target="_blank" rel="noopener" class="experiment__cta">
+          <span class="experiment__cta-text">Launch Experiment →</span>
+        </a>
+      </div>
+      <a href="https://chadbercea.github.io/design-system-lab/docker-image-runner/" target="_blank" rel="noopener" class="experiment__visual">
+        <div class="experiment__window">
+          <div class="experiment__window-chrome">
+            <div class="experiment__window-dots">
+              <span class="experiment__window-dot experiment__window-dot--red"></span>
+              <span class="experiment__window-dot experiment__window-dot--yellow"></span>
+              <span class="experiment__window-dot experiment__window-dot--green"></span>
+            </div>
+            <div class="experiment__window-url">
+              <span class="experiment__window-url-icon">🔒</span>
+              <span class="experiment__window-url-text">chadbercea.github.io/design-system-lab/docker-image-runner</span>
+            </div>
+          </div>
+          <div class="experiment__window-content">
+            <div class="experiment__preview">
+              <!-- Top metrics bar -->
+              <div class="experiment__metrics-bar">
+                <div class="experiment__metric-item">
+                  <div class="experiment__metric-graph experiment__metric-graph--cpu"></div>
+                  <span class="experiment__metric-value">22.5%</span>
+                </div>
+                <div class="experiment__metric-item">
+                  <div class="experiment__metric-graph experiment__metric-graph--memory"></div>
+                  <span class="experiment__metric-value">535 MB</span>
+                </div>
+                <div class="experiment__metric-item">
+                  <div class="experiment__metric-graph experiment__metric-graph--network"></div>
+                  <span class="experiment__metric-value">1.1 MB/s</span>
+                </div>
+                <div class="experiment__metric-item">
+                  <span class="experiment__metric-value experiment__metric-value--large">912</span>
+                </div>
+              </div>
+              <!-- 3D Container visualization -->
+              <div class="experiment__3d-area">
+                <div class="experiment__cube">
+                  <div class="experiment__cube-face experiment__cube-face--front"></div>
+                  <div class="experiment__cube-face experiment__cube-face--back"></div>
+                  <div class="experiment__cube-face experiment__cube-face--left"></div>
+                  <div class="experiment__cube-face experiment__cube-face--right"></div>
+                  <div class="experiment__cube-face experiment__cube-face--top"></div>
+                  <div class="experiment__cube-face experiment__cube-face--bottom"></div>
+                </div>
+                <div class="experiment__container-label">
+                  <span class="experiment__label-name">nginx : latest</span>
+                  <div class="experiment__label-details">
+                    <span>Ports: 80, 443</span>
+                    <span>Status: Running</span>
+                    <span>Uptime: 12h 34m</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Bottom controls -->
+              <div class="experiment__controls">
+                <div class="experiment__control-btn">
+                  <span class="experiment__control-icon">↻</span>
+                  <span>Restart</span>
+                </div>
+                <div class="experiment__control-btn">
+                  <span class="experiment__control-icon">⏸</span>
+                  <span>Pause</span>
+                </div>
+                <div class="experiment__control-btn">
+                  <span class="experiment__control-icon">■</span>
+                  <span>Stop</span>
+                </div>
+                <div class="experiment__control-btn experiment__control-btn--danger">
+                  <span class="experiment__control-icon">✕</span>
+                  <span>Delete</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="footer__inner">
