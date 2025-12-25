@@ -737,7 +737,7 @@ body::before {
 
 /* Navigation / Filter */
 .nav {
-  padding: var(--space-lg) 0;
+  padding: var(--space-md) 0;
   border-bottom: 1px solid var(--black-border);
   position: sticky;
   top: 40px; /* Below site-nav header */
@@ -791,7 +791,7 @@ body::before {
 
 /* Projects Grid */
 .projects {
-  padding: var(--space-xl) 0;
+  padding-bottom: var(--space-xl);
 }
 
 .projects__grid {
